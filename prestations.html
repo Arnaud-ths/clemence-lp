@@ -4,29 +4,124 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Prestations — Clémence Creative Studio · Social Media Manager Paris</title>
-<meta name="description" content="Les 4 formules de Clémence Creative Studio : Gestion mensuelle, Les 4 Saisons, La Créative, et l'Audit. Choisissez ce qui vous ressemble." />
+<meta name="description" content="Les Premiers Pas (270€) · La Créative (dès 545€) · Les Quatre Saisons (dès 880€) · Sur-Mesure (TJ 450€/j). Appel découverte gratuit." />
 <link rel="stylesheet" href="colors_and_type.css" />
 <link rel="stylesheet" href="app.css" />
 <script src="https://unpkg.com/lucide@0.544.0/dist/umd/lucide.min.js"></script>
 <style>
-  /* page-specific tweaks */
-  .pp-hero { padding: 84px 40px 32px; }
-  .pp-card { background: var(--surface); border-radius: 28px; padding: 44px 40px; box-shadow: var(--shadow-card); border: 1px solid color-mix(in srgb, var(--border) 45%, transparent); }
-  .pp-card + .pp-card { margin-top: 28px; }
-  .pp-includes li { margin: 8px 0; padding-left: 28px; position: relative; font-family: var(--serif-body); color: var(--fg1); font-size: 16px; line-height: 1.55; }
-  .pp-includes li::before { content: "✿"; position: absolute; left: 4px; top: 0; color: var(--accent); font-size: 14px; }
-  .pp-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 56px; align-items: start; }
-  @media (max-width: 880px) { .pp-grid { grid-template-columns: 1fr; gap: 28px; } .pp-card { padding: 32px 24px; } }
-  .pp-jump { display: flex; flex-wrap: wrap; gap: 10px; padding: 14px 0 24px; }
-  .pp-jump a { font-family: var(--serif-body); font-size: 14px; color: var(--fg1); background: var(--surface); border: 1px solid color-mix(in srgb, var(--border) 50%, transparent); border-radius: 999px; padding: 8px 16px; text-decoration: none; transition: all .2s ease; }
+  /* ────────────────────────────────────────────── */
+  /* Page Prestations — immersive lifestyle layout  */
+  /* ────────────────────────────────────────────── */
+
+  .pp-hero {
+    position: relative; min-height: 78vh; display: flex; align-items: flex-end;
+    background-image:
+      linear-gradient(to top, color-mix(in srgb, var(--bg) 92%, transparent) 0%, color-mix(in srgb, var(--bg) 35%, transparent) 55%, color-mix(in srgb, var(--bg) 10%, transparent) 100%),
+      url("assets/lifestyle/cerisiers-2.jpg");
+    background-size: cover; background-position: center 30%; background-attachment: fixed;
+    padding: 0 0 56px;
+  }
+  .pp-hero-inner { padding: 0 40px 0; width: 100%; max-width: 1200px; margin: 0 auto; }
+  .pp-hero h1 { font-family: var(--serif-display); color: var(--fg-heading); font-size: clamp(56px, 9vw, 132px); line-height: 0.94; margin: 0; letter-spacing: -0.02em; max-width: 14ch; text-shadow: 0 2px 16px rgba(248,243,227,.45); }
+  .pp-hero .script { font-family: var(--script); color: var(--accent); font-size: 1.18em; line-height: 0.88; }
+  .pp-hero .eyebrow { font-family: var(--serif-body); font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 22px; }
+  .pp-hero p { font-family: var(--serif-body); color: var(--fg1); font-size: 20px; margin-top: 28px; max-width: 56ch; line-height: 1.55; }
+
+  /* Sticky appel découverte band */
+  .pp-discovery {
+    position: sticky; top: 0; z-index: 30;
+    background: var(--accent); color: var(--on-accent);
+    padding: 14px 40px; display: flex; align-items: center; justify-content: center; gap: 22px;
+    font-family: var(--serif-body); font-size: 15px;
+    box-shadow: 0 4px 16px rgba(0,0,0,.06);
+  }
+  .pp-discovery strong { font-family: var(--serif-display); font-size: 17px; }
+  .pp-discovery .script { font-family: var(--script); font-size: 22px; line-height: 0.9; }
+  .pp-discovery a { color: var(--on-accent); font-family: var(--serif-display); padding: 8px 18px; border: 1.5px solid var(--on-accent); border-radius: 999px; text-decoration: none; font-size: 14px; transition: all .2s ease; white-space: nowrap; }
+  .pp-discovery a:hover { background: var(--on-accent); color: var(--accent); }
+
+  /* Quick nav jump */
+  .pp-jump-wrap { background: var(--surface); border-bottom: 1px solid color-mix(in srgb, var(--border) 35%, transparent); padding: 16px 40px; position: sticky; top: 50px; z-index: 25; }
+  .pp-jump { max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+  .pp-jump a { font-family: var(--serif-body); font-size: 13px; color: var(--fg1); background: transparent; border: 1px solid color-mix(in srgb, var(--border) 60%, transparent); border-radius: 999px; padding: 7px 14px; text-decoration: none; transition: all .2s ease; }
   .pp-jump a:hover { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+  .pp-jump a.is-flagship { background: color-mix(in srgb, var(--accent) 12%, transparent); border-color: color-mix(in srgb, var(--accent) 40%, transparent); color: var(--accent); font-weight: 500; }
+
+  /* Formule section — immersive split */
+  .pp-formula { position: relative; padding: 0; overflow: hidden; }
+  .pp-formula-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 0; align-items: stretch; min-height: 640px; }
+  .pp-formula.reverse .pp-formula-inner { grid-template-areas: "txt img"; }
+  .pp-formula:not(.reverse) .pp-formula-inner { grid-template-areas: "img txt"; }
+  .pp-formula-img { grid-area: img; position: relative; overflow: hidden; min-height: 480px; }
+  .pp-formula-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 12s ease-out; }
+  .pp-formula-img:hover img { transform: scale(1.05); }
+  .pp-formula-txt { grid-area: txt; padding: 80px 60px; display: flex; flex-direction: column; justify-content: center; max-width: 640px; }
+  .pp-formula-number { font-family: var(--serif-display); font-size: 18px; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 14px; }
+  .pp-formula-tag { display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent); font-family: var(--serif-body); font-size: 13px; letter-spacing: 0.06em; padding: 6px 14px; border-radius: 999px; margin-bottom: 18px; text-transform: uppercase; }
+  .pp-formula h2 { font-family: var(--serif-display); color: var(--fg-heading); font-size: clamp(40px, 4.6vw, 64px); margin: 0; line-height: 1.0; letter-spacing: -0.01em; }
+  .pp-formula h2 .script { font-family: var(--script); color: var(--accent); font-size: 1.14em; line-height: 0.88; }
+  .pp-formula .lede { font-family: var(--serif-body); color: var(--fg1); font-size: 19px; margin-top: 24px; line-height: 1.6; max-width: 48ch; }
+  .pp-formula .price { font-family: var(--script); color: var(--accent); font-size: 42px; line-height: 1; margin: 30px 0 6px; }
+  .pp-formula .price small { font-family: var(--serif-body); font-size: 14px; color: var(--fg2); letter-spacing: 0.05em; text-transform: uppercase; display: block; margin-top: 6px; }
+  .pp-formula .price-note { font-family: var(--serif-body); font-size: 14px; color: var(--fg2); font-style: italic; margin-bottom: 24px; }
+  .pp-includes { list-style: none; padding: 24px 0 0; margin: 0; border-top: 1px dashed color-mix(in srgb, var(--border) 70%, transparent); }
+  .pp-includes li { margin: 10px 0; padding-left: 26px; position: relative; font-family: var(--serif-body); color: var(--fg1); font-size: 16px; line-height: 1.55; }
+  .pp-includes li::before { content: "✿"; position: absolute; left: 0; top: 1px; color: var(--accent); font-size: 14px; }
+  .pp-formula-cta { display: inline-flex; align-items: center; gap: 9px; align-self: flex-start; margin-top: 28px; padding: 13px 28px; border-radius: 999px; background: var(--accent); color: var(--on-accent); text-decoration: none; font-family: var(--serif-display); font-size: 18px; transition: transform .2s ease; }
+  .pp-formula-cta:hover { transform: translateY(-2px); }
+
+  /* Flagship variant for La Créative */
+  .pp-formula.flagship { background: color-mix(in srgb, var(--accent-soft) 14%, var(--surface)); }
+  .pp-formula.flagship .pp-formula-tag { background: var(--accent); color: var(--on-accent); }
+
+  /* TJ band */
+  .pp-tj { background: var(--surface); padding: 60px 40px; border-top: 1px solid color-mix(in srgb, var(--border) 35%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--border) 35%, transparent); }
+  .pp-tj-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: center; }
+  .pp-tj h3 { font-family: var(--serif-display); color: var(--fg-heading); font-size: clamp(28px, 3.4vw, 40px); margin: 0; line-height: 1.05; }
+  .pp-tj h3 .script { font-family: var(--script); color: var(--accent); font-size: 1.18em; line-height: 0.9; }
+  .pp-tj p { font-family: var(--serif-body); color: var(--fg1); font-size: 17px; margin-top: 14px; line-height: 1.6; max-width: 50ch; }
+  .pp-tj-card { background: var(--bg); border: 1.5px dashed color-mix(in srgb, var(--accent) 50%, transparent); border-radius: 22px; padding: 32px 36px; display: flex; flex-direction: column; gap: 8px; align-items: center; text-align: center; }
+  .pp-tj-card .label { font-family: var(--serif-body); font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg2); }
+  .pp-tj-card .amount { font-family: var(--serif-display); color: var(--fg-heading); font-size: 56px; line-height: 1; letter-spacing: -0.02em; }
+  .pp-tj-card .amount .ht { font-size: 18px; color: var(--fg2); letter-spacing: 0.06em; margin-left: 6px; }
+  .pp-tj-card .desc { font-family: var(--serif-body); font-size: 14px; color: var(--fg1); margin-top: 8px; }
+  .pp-tj-card .desc strong { font-family: var(--script); color: var(--accent); font-size: 22px; vertical-align: middle; }
+
+  /* Final CTA */
+  .pp-final {
+    background-image:
+      linear-gradient(to bottom, color-mix(in srgb, var(--bg) 60%, transparent), color-mix(in srgb, var(--bg) 92%, transparent)),
+      url("assets/lifestyle/cerisiers-1.jpg");
+    background-size: cover; background-position: center;
+    padding: 96px 40px;
+    text-align: center;
+  }
+  .pp-final h2 { font-family: var(--serif-display); color: var(--fg-heading); font-size: clamp(36px, 5vw, 60px); line-height: 1.0; margin: 0 auto; max-width: 22ch; }
+  .pp-final h2 .script { font-family: var(--script); color: var(--accent); font-size: 1.18em; line-height: 0.9; }
+  .pp-final p { font-family: var(--serif-body); color: var(--fg1); font-size: 19px; margin: 22px auto 0; max-width: 52ch; line-height: 1.55; }
+  .pp-final .cta-row { margin-top: 36px; display: inline-flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+  .pp-final .btn-prim, .pp-final .btn-ghost { padding: 14px 32px; border-radius: 999px; text-decoration: none; font-family: var(--serif-display); font-size: 19px; display: inline-flex; align-items: center; gap: 9px; transition: transform .2s ease; }
+  .pp-final .btn-prim { background: var(--accent); color: var(--on-accent); }
+  .pp-final .btn-ghost { background: transparent; color: var(--fg-strong); border: 1.5px solid var(--border); }
+  .pp-final .btn-prim:hover, .pp-final .btn-ghost:hover { transform: translateY(-2px); }
+
+  /* Responsive */
+  @media (max-width: 880px) {
+    .pp-hero { background-attachment: scroll; min-height: 64vh; }
+    .pp-formula-inner { grid-template-columns: 1fr !important; min-height: 0; grid-template-areas: "img" "txt" !important; }
+    .pp-formula-txt { padding: 48px 28px; max-width: 100%; }
+    .pp-formula-img { min-height: 320px; }
+    .pp-tj-inner { grid-template-columns: 1fr; gap: 28px; }
+    .pp-discovery { flex-direction: column; gap: 10px; padding: 14px 24px; text-align: center; }
+    .pp-jump-wrap { top: 100px; }
+  }
 </style>
 </head>
 <body>
 <div class="ccs-app">
 
-<!-- NAV minimal -->
-<header style="position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid color-mix(in srgb, var(--border) 28%, transparent);">
+<!-- NAV -->
+<header style="position: relative; z-index: 40; background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid color-mix(in srgb, var(--border) 28%, transparent);">
   <nav class="wrap" style="padding: 15px 40px; display: flex; align-items: center; justify-content: space-between; gap: 24px;">
     <a href="index.html" style="text-decoration: none; line-height: 1; display: block;">
       <div style="font-family: var(--script); color: var(--fg-heading); font-size: 26px; line-height: 0.85;">Clémence</div>
@@ -44,161 +139,184 @@
 
 <main>
 
-  <!-- HERO -->
-  <section class="wrap pp-hero">
-    <div style="font-family: var(--serif-body); font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px;">Les prestations</div>
-    <h1 style="font-family: var(--serif-display); color: var(--fg-heading); font-size: clamp(46px, 6.4vw, 78px); line-height: 1.0; margin: 0; letter-spacing: -0.01em; max-width: 18ch;">
-      Quatre formules,<br /><span style="font-family: var(--script); color: var(--accent); font-size: 1.12em; line-height: 0.9;">cousues main.</span>
-    </h1>
-    <p style="font-family: var(--serif-body); color: var(--fg1); font-size: 20px; margin-top: 24px; max-width: 56ch; line-height: 1.55;">
-      Chaque marque a son rythme, son histoire, son budget. C'est pourquoi je propose <em style="color: var(--fg-heading);">quatre formules distinctes</em> — du suivi mensuel complet à l'audit ponctuel. Trouvez celle qui vous ressemble.
-    </p>
-    <div class="pp-jump">
-      <a href="#gestion-mensuelle">01 · Gestion mensuelle</a>
-      <a href="#les-4-saisons">02 · Les 4 Saisons</a>
-      <a href="#la-creative">03 · La Créative</a>
-      <a href="#audit-coaching">04 · L'Audit</a>
+  <!-- ═══ HERO IMMERSIF ═══ -->
+  <section class="pp-hero">
+    <div class="pp-hero-inner">
+      <div class="eyebrow">Les prestations</div>
+      <h1>Quatre formules,<br /><span class="script">cousues main.</span></h1>
+      <p>Du diagnostic ponctuel à la gestion saisonnière sur 12 mois. Trois cadres pensés, et un quatrième entièrement à votre image.</p>
     </div>
   </section>
 
-  <!-- 01 · Gestion mensuelle -->
-  <section class="wrap" style="padding: 32px 40px;">
-    <article id="gestion-mensuelle" class="pp-card">
-      <div class="pp-grid">
-        <div>
-          <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 14px;">
-            <span style="font-family: var(--serif-display); font-size: 56px; color: var(--accent-soft); line-height: 0.8;">01</span>
-            <span class="ccs-chip">Mensuel · à partir de 400€/mois</span>
-          </div>
-          <h2 style="font-family: var(--serif-display); color: var(--fg-heading); font-size: clamp(32px, 4vw, 44px); margin: 0; line-height: 1.05;">Gestion mensuelle</h2>
-          <p style="font-family: var(--serif-body); color: var(--fg1); font-size: 18px; margin-top: 18px; max-width: 50ch; line-height: 1.6;">
-            Vous voulez une présence Instagram qui tourne, sans devoir y penser. Je deviens <em style="color: var(--fg-heading);">votre SMM attitrée</em> : stratégie, création, programmation, community management — tout est pris en charge.
-          </p>
-        </div>
-        <div>
-          <div style="font-family: var(--serif-body); font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px;">Inclus dans la formule</div>
-          <ul class="pp-includes" style="list-style: none; padding: 0; margin: 0;">
-            <li>Stratégie éditoriale trimestrielle + ligne éditoriale</li>
-            <li>Calendrier éditorial mensuel (8 à 12 posts)</li>
-            <li>Création de visuels & légendes</li>
-            <li>Programmation des publications</li>
-            <li>Community management & réponses DM</li>
-            <li>Point mensuel KPI + ajustements</li>
-          </ul>
-          <a href="index.html#contact" class="ccs-btn ccs-btn--primary" style="margin-top: 24px; font-family: var(--serif-display); font-size: 17px; padding: 11px 24px; border-radius: 999px; background: var(--accent); color: var(--on-accent); text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">Demander un devis →</a>
-        </div>
+  <!-- ═══ STICKY BAND APPEL DÉCOUVERTE ═══ -->
+  <div class="pp-discovery">
+    <strong>Appel découverte · <span class="script">offert</span></strong>
+    <span style="opacity: .85;">30 minutes, sans engagement. On regarde ensemble quelle formule vous correspond.</span>
+    <a href="index.html#contact">Réserver mon appel →</a>
+  </div>
+
+  <!-- Quick nav -->
+  <div class="pp-jump-wrap">
+    <div class="pp-jump">
+      <a href="#premiers-pas">01 · Les Premiers Pas</a>
+      <a href="#la-creative" class="is-flagship">02 · La Créative ✿</a>
+      <a href="#quatre-saisons">03 · Les Quatre Saisons</a>
+      <a href="#sur-mesure">04 · Sur-Mesure</a>
+      <a href="#tj">TJ Freelance</a>
+    </div>
+  </div>
+
+  <!-- ═══ 01 · Les Premiers Pas ═══ -->
+  <section id="premiers-pas" class="pp-formula">
+    <div class="pp-formula-inner">
+      <div class="pp-formula-img">
+        <img src="assets/lifestyle/patisserie-matcha.jpg" alt="Pâtisserie matcha et croissant — l'ambiance d'un démarrage en douceur" loading="lazy" />
       </div>
-    </article>
+      <div class="pp-formula-txt">
+        <div class="pp-formula-number">— 01</div>
+        <span class="pp-formula-tag">Ponctuel · 7 jours</span>
+        <h2>Les Premiers Pas.</h2>
+        <p class="lede">Pour celles qui démarrent et veulent des <em style="color: var(--fg-heading);">bases solides</em>. On regarde tout, on pose le positionnement, et je vous remets un plan d'action clair en main propre.</p>
+        <div class="price">270 € <small>TTC, en une fois</small></div>
+        <ul class="pp-includes">
+          <li>Audit complet de votre compte</li>
+          <li>Positionnement clarifié</li>
+          <li>10 recommandations concrètes</li>
+          <li>Call de restitution d'1 h</li>
+          <li>Livré en 7 jours</li>
+        </ul>
+        <a href="index.html#contact?formula=premiers-pas" class="pp-formula-cta">Démarrer mes premiers pas →</a>
+      </div>
+    </div>
   </section>
 
-  <!-- 02 · Les 4 Saisons -->
-  <section class="wrap" style="padding: 14px 40px;">
-    <article id="les-4-saisons" class="pp-card">
-      <div class="pp-grid">
-        <div>
-          <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 14px;">
-            <span style="font-family: var(--serif-display); font-size: 56px; color: var(--accent-soft); line-height: 0.8;">02</span>
-            <span class="ccs-chip">Trimestriel · Pack signature</span>
-          </div>
-          <h2 style="font-family: var(--serif-display); color: var(--fg-heading); font-size: clamp(32px, 4vw, 44px); margin: 0; line-height: 1.05;">Les 4 Saisons <span style="font-family: var(--script); color: var(--accent); font-size: 0.7em;">✿</span></h2>
-          <p style="font-family: var(--serif-body); color: var(--fg1); font-size: 18px; margin-top: 18px; max-width: 50ch; line-height: 1.6;">
-            Quatre packages dans l'année, calés sur le rythme des saisons. À chaque saison sa charte, son ambiance, son calendrier de contenus. <em style="color: var(--fg-heading);">La signature du studio.</em>
-          </p>
-        </div>
-        <div>
-          <div style="font-family: var(--serif-body); font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px;">Inclus dans la formule</div>
-          <ul class="pp-includes" style="list-style: none; padding: 0; margin: 0;">
-            <li>Mini-charte saisonnière (palette, mood, typo)</li>
-            <li>Calendrier édito trimestriel</li>
-            <li>12 visuels de posts prêts à publier</li>
-            <li>4 templates de stories réutilisables</li>
-            <li>Briefing photo / vidéo pour la saison</li>
-            <li>Engagement renouvelé à chaque saison</li>
-          </ul>
-          <a href="index.html#contact" class="ccs-btn ccs-btn--primary" style="margin-top: 24px; font-family: var(--serif-display); font-size: 17px; padding: 11px 24px; border-radius: 999px; background: var(--accent); color: var(--on-accent); text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">Démarrer une saison →</a>
-        </div>
+  <!-- ═══ 02 · La Créative (flagship) ═══ -->
+  <section id="la-creative" class="pp-formula flagship reverse">
+    <div class="pp-formula-inner">
+      <div class="pp-formula-txt">
+        <div class="pp-formula-number">— 02 · Formule signature</div>
+        <span class="pp-formula-tag">✿ La signature</span>
+        <h2>La <span class="script">Créative.</span></h2>
+        <p class="lede">Pour construire une vraie identité visuelle qui vous ressemble, avec une charte, des piliers de contenu et un mois de calendrier éditorial. <em style="color: var(--fg-heading);">La formule pour poser des bases qui durent.</em></p>
+        <div class="price">à partir de 545 € <small>TTC</small></div>
+        <ul class="pp-includes">
+          <li>Audit complet + stratégie sur trois mois</li>
+          <li>Charte visuelle personnalisée (palette, typo, motifs)</li>
+          <li>Définition de vos piliers de contenu</li>
+          <li>Templates de posts prêts à dupliquer</li>
+          <li>Calendrier éditorial sur un mois complet</li>
+          <li>Deux calls d'une heure pour ancrer la méthode</li>
+        </ul>
+        <a href="index.html#contact?formula=la-creative" class="pp-formula-cta">Démarrer La Créative →</a>
       </div>
-    </article>
+      <div class="pp-formula-img">
+        <img src="assets/lifestyle/interieur-fleurs.jpg" alt="Intérieur cosy avec bouquet — l'ambiance créative du studio" loading="lazy" />
+      </div>
+    </div>
   </section>
 
-  <!-- 03 · La Créative -->
-  <section class="wrap" style="padding: 14px 40px;">
-    <article id="la-creative" class="pp-card">
-      <div class="pp-grid">
-        <div>
-          <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 14px;">
-            <span style="font-family: var(--serif-display); font-size: 56px; color: var(--accent-soft); line-height: 0.8;">03</span>
-            <span class="ccs-chip">Projet · Sur devis</span>
-          </div>
-          <h2 style="font-family: var(--serif-display); color: var(--fg-heading); font-size: clamp(32px, 4vw, 44px); margin: 0; line-height: 1.05;">La Créative</h2>
-          <p style="font-family: var(--serif-body); color: var(--fg1); font-size: 18px; margin-top: 18px; max-width: 50ch; line-height: 1.6;">
-            Direction artistique complète pour donner ou redonner une vraie cohérence visuelle à votre univers digital. Vous gardez la main sur la gestion — moi je vous livre <em style="color: var(--fg-heading);">tous les outils créatifs</em>.
-          </p>
-        </div>
-        <div>
-          <div style="font-family: var(--serif-body); font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px;">Inclus dans la formule</div>
-          <ul class="pp-includes" style="list-style: none; padding: 0; margin: 0;">
-            <li>Charte Instagram complète (palette, typo, ton)</li>
-            <li>Système de templates de posts (carrousels, fixes)</li>
-            <li>Pack de templates stories (highlights, sondages, quotes)</li>
-            <li>Direction artistique des shootings (moodboards)</li>
-            <li>Guidelines de rédaction & ligne édito</li>
-            <li>Fichiers Canva / Figma livrés et modifiables</li>
-          </ul>
-          <a href="index.html#contact" class="ccs-btn ccs-btn--primary" style="margin-top: 24px; font-family: var(--serif-display); font-size: 17px; padding: 11px 24px; border-radius: 999px; background: var(--accent); color: var(--on-accent); text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">Discuter du projet →</a>
-        </div>
+  <!-- ═══ 03 · Les Quatre Saisons ═══ -->
+  <section id="quatre-saisons" class="pp-formula">
+    <div class="pp-formula-inner">
+      <div class="pp-formula-img">
+        <img src="assets/lifestyle/cerisiers-2.jpg" alt="Cerisiers en fleurs au printemps parisien — le rythme des saisons" loading="lazy" />
       </div>
-    </article>
+      <div class="pp-formula-txt">
+        <div class="pp-formula-number">— 03 · Engagement 12 mois</div>
+        <span class="pp-formula-tag">Engagement long</span>
+        <h2>Les Quatre Saisons.</h2>
+        <p class="lede">Pour un accompagnement sur l'année, <em style="color: var(--fg-heading);">saison par saison</em>. Une charte qui évolue avec les mois, sans jamais perdre votre cohérence.</p>
+        <div class="price">à partir de 880 € <small>TTC</small></div>
+        <p class="price-note">— Engagement minimum 12 mois.</p>
+        <ul class="pp-includes">
+          <li>Tout ce qui est dans La Créative</li>
+          <li>4 chartes saisonnières (printemps, été, automne, hiver)</li>
+          <li>Bibliothèque de contenu réutilisable</li>
+          <li>Suivi mensuel, reporting trimestriel</li>
+          <li>Accompagnement 12 mois</li>
+        </ul>
+        <a href="index.html#contact?formula=quatre-saisons" class="pp-formula-cta">Démarrer une année →</a>
+      </div>
+    </div>
   </section>
 
-  <!-- 04 · L'Audit -->
-  <section class="wrap" style="padding: 14px 40px 88px;">
-    <article id="audit-coaching" class="pp-card">
-      <div class="pp-grid">
-        <div>
-          <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 14px;">
-            <span style="font-family: var(--serif-display); font-size: 56px; color: var(--accent-soft); line-height: 0.8;">04</span>
-            <span class="ccs-chip">Ponctuel · à partir de 150€</span>
-          </div>
-          <h2 style="font-family: var(--serif-display); color: var(--fg-heading); font-size: clamp(32px, 4vw, 44px); margin: 0; line-height: 1.05;">L'Audit</h2>
-          <p style="font-family: var(--serif-body); color: var(--fg1); font-size: 18px; margin-top: 18px; max-width: 50ch; line-height: 1.6;">
-            Vous gérez votre compte vous-même mais vous sentez que quelque chose cloche ? Je passe votre Instagram au peigne fin et je vous remets <em style="color: var(--fg-heading);">un plan d'action concret</em>, suivi d'une session de coaching 1:1.
-          </p>
-        </div>
-        <div>
-          <div style="font-family: var(--serif-body); font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px;">Inclus dans la formule</div>
-          <ul class="pp-includes" style="list-style: none; padding: 0; margin: 0;">
-            <li>Audit écrit de votre compte (15-20 pages)</li>
-            <li>Analyse benchmark vs. 3 concurrents</li>
-            <li>Plan d'action sur 90 jours</li>
-            <li>Recommandations visuelles et éditoriales</li>
-            <li>Session coaching 1h en visio</li>
-            <li>Replay + ressources offertes</li>
-          </ul>
-          <a href="index.html#contact" class="ccs-btn ccs-btn--primary" style="margin-top: 24px; font-family: var(--serif-display); font-size: 17px; padding: 11px 24px; border-radius: 999px; background: var(--accent); color: var(--on-accent); text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">Réserver mon audit →</a>
-        </div>
+  <!-- ═══ 04 · Sur-Mesure ═══ -->
+  <section id="sur-mesure" class="pp-formula reverse">
+    <div class="pp-formula-inner">
+      <div class="pp-formula-txt">
+        <div class="pp-formula-number">— 04 · Hors cadre</div>
+        <span class="pp-formula-tag">Sur devis</span>
+        <h2>Sur-<span class="script">Mesure.</span></h2>
+        <p class="lede">Pour les besoins qui ne rentrent dans <em style="color: var(--fg-heading);">aucune case</em>. Gestion complète, création photo/vidéo, lancement Pinterest, refonte d'identité ou formation 1:1. On invente ensemble.</p>
+        <div class="price">Sur devis</div>
+        <p class="price-note">— Tarification au jour ou au forfait, selon le projet.</p>
+        <ul class="pp-includes">
+          <li>Gestion complète de communauté</li>
+          <li>Création de contenu (photo, vidéo)</li>
+          <li>Lancement Pinterest dédié</li>
+          <li>Refonte d'identité visuelle</li>
+          <li>Formation 1:1</li>
+        </ul>
+        <a href="index.html#contact?formula=sur-mesure" class="pp-formula-cta">En discuter →</a>
       </div>
-    </article>
+      <div class="pp-formula-img">
+        <img src="assets/lifestyle/work-cottagecore.jpg" alt="Setup créatif en pleine nature — l'esprit sur-mesure du studio" loading="lazy" />
+      </div>
+    </div>
   </section>
 
-  <!-- CTA bas de page -->
-  <section class="gingham gingham--spring" style="border-top: 1px solid color-mix(in srgb, var(--border) 30%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--border) 30%, transparent);">
-    <div style="background: color-mix(in srgb, var(--bg) 86%, transparent);">
-      <div class="wrap" style="padding: 72px 40px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 18px;">
-        <div style="font-family: var(--serif-body); font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent);">Toujours hésitant·e ?</div>
-        <h2 style="font-family: var(--serif-display); color: var(--fg-heading); font-size: clamp(34px, 4.4vw, 52px); margin: 0; line-height: 1.05; max-width: 22ch;">
-          Parlons de ta marque, je <span style="font-family: var(--script); color: var(--accent); font-size: 1.18em; line-height: 0.9;">t'oriente</span>.
-        </h2>
-        <p style="font-family: var(--serif-body); color: var(--fg1); font-size: 18px; margin-top: 4px; max-width: 50ch;">Première réponse sous 48 h, toujours. On choisira ensemble la formule la plus adaptée — ou on inventera la tienne.</p>
-        <a href="index.html#contact" class="ccs-btn ccs-btn--primary" style="margin-top: 14px; font-family: var(--serif-display); font-size: 19px; padding: 13px 32px; border-radius: 999px; background: var(--accent); color: var(--on-accent); text-decoration: none; display: inline-flex; align-items: center; gap: 9px;">M'écrire un message →</a>
+  <!-- ═══ TJ FREELANCE ═══ -->
+  <section id="tj" class="pp-tj">
+    <div class="pp-tj-inner">
+      <div>
+        <h3>Une mission ponctuelle <span class="script">à la journée</span> ?</h3>
+        <p>Pour les chantiers cadrés — refonte de feed, journée shooting, accompagnement événementiel ou backup d'équipe en interne — je propose aussi un tarif journalier net. Devis sous 48 h après notre appel.</p>
       </div>
+      <div class="pp-tj-card">
+        <div class="label">Taux journalier</div>
+        <div class="amount">450 €<span class="ht">HT</span></div>
+        <div class="desc"><strong>≈</strong> 7 h de travail · à Paris ou en remote</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FAQ ÉDITORIAL ═══ -->
+  <section style="padding: 80px 40px; max-width: 800px; margin: 0 auto;">
+    <div style="font-family: var(--serif-body); font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; text-align: center;">Questions fréquentes</div>
+    <h2 style="font-family: var(--serif-display); color: var(--fg-heading); font-size: clamp(32px, 4vw, 48px); text-align: center; margin: 0 0 40px; line-height: 1.05;">Avant de vous lancer.</h2>
+    <details style="border-top: 1px solid var(--border); padding: 22px 0; cursor: pointer;" open>
+      <summary style="font-family: var(--serif-display); color: var(--fg-heading); font-size: 22px; list-style: none; outline: none; display: flex; justify-content: space-between; align-items: center;">Vous travaillez avec des marques au-delà du lifestyle ? <span style="color: var(--accent); font-size: 26px;">+</span></summary>
+      <p style="font-family: var(--serif-body); color: var(--fg1); font-size: 16px; line-height: 1.65; margin-top: 14px;">Rarement, et seulement si le projet me parle vraiment. Mon expertise est sur les marques artisanales (mode, bijou, déco, édition). C'est là que je suis le plus utile.</p>
+    </details>
+    <details style="border-top: 1px solid var(--border); padding: 22px 0; cursor: pointer;">
+      <summary style="font-family: var(--serif-display); color: var(--fg-heading); font-size: 22px; list-style: none; outline: none; display: flex; justify-content: space-between; align-items: center;">Vous faites aussi les vidéos et les Reels ? <span style="color: var(--accent); font-size: 26px;">+</span></summary>
+      <p style="font-family: var(--serif-body); color: var(--fg1); font-size: 16px; line-height: 1.65; margin-top: 14px;">Oui pour le scénario, le montage, la publication. Si vous voulez du tournage en studio, je travaille avec une vidéaste de confiance qu'on intègre au devis.</p>
+    </details>
+    <details style="border-top: 1px solid var(--border); padding: 22px 0; cursor: pointer;">
+      <summary style="font-family: var(--serif-display); color: var(--fg-heading); font-size: 22px; list-style: none; outline: none; display: flex; justify-content: space-between; align-items: center;">Comment se passe le démarrage ? <span style="color: var(--accent); font-size: 26px;">+</span></summary>
+      <p style="font-family: var(--serif-body); color: var(--fg1); font-size: 16px; line-height: 1.65; margin-top: 14px;">On commence toujours par un appel découverte gratuit de 30 minutes. Si on est alignées, je vous envoie un devis sous 48 h. La première semaine est dédiée à l'onboarding et à l'audit.</p>
+    </details>
+    <details style="border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 22px 0; cursor: pointer;">
+      <summary style="font-family: var(--serif-display); color: var(--fg-heading); font-size: 22px; list-style: none; outline: none; display: flex; justify-content: space-between; align-items: center;">Les Quatre Saisons, c'est quoi exactement ? <span style="color: var(--accent); font-size: 26px;">+</span></summary>
+      <p style="font-family: var(--serif-body); color: var(--fg1); font-size: 16px; line-height: 1.65; margin-top: 14px;">C'est ma méthode signature : on construit une charte qui évolue avec les saisons (printemps, été, automne, hiver), avec des palettes et illustrations dédiées. Vous gardez la cohérence tout en respirant.</p>
+    </details>
+  </section>
+
+  <!-- ═══ CTA FINAL ═══ -->
+  <section class="pp-final">
+    <div style="font-family: var(--serif-body); font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px;">Toujours hésitant·e ?</div>
+    <h2>Parlons de votre marque, je <span class="script">vous oriente</span>.</h2>
+    <p>Première réponse sous 48 h, toujours. On choisira ensemble la formule la plus adaptée — ou on inventera la vôtre.</p>
+    <div class="cta-row">
+      <a href="index.html#contact" class="btn-prim">Réserver l'appel découverte →</a>
+      <a href="index.html" class="btn-ghost">Revenir au studio</a>
     </div>
   </section>
 
 </main>
 
-<!-- FOOTER minimal -->
-<footer style="border-top: 1px solid var(--border); padding: 32px 40px; text-align: center; background: var(--surface);">
+<!-- FOOTER -->
+<footer style="border-top: 1px solid var(--border); padding: 40px; text-align: center; background: var(--surface);">
   <a href="index.html" style="text-decoration: none; line-height: 1; display: inline-block; margin-bottom: 14px;">
     <div style="font-family: var(--script); color: var(--fg-heading); font-size: 36px; line-height: 0.85;">Clémence</div>
     <div style="font-family: var(--serif-display); color: var(--accent); font-size: 14px; letter-spacing: 0.16em; text-transform: uppercase; margin-top: 4px;">Creative Studio</div>

@@ -38,12 +38,12 @@ function Marquee({ dur = 28 }) {
   );
 }
 
-/* ── SERVICES / LES 4 PRESTATIONS ── */
+/* ── SERVICES / LES 4 FORMULES (vrais tarifs) ── */
 const OFFERS = [
-  { n: "01", slug: "gestion-mensuelle", t: "Gestion mensuelle", d: "Stratégie, ligne édito, création, programmation et community management. Je deviens ta SMM attitrée.", tag: "Mensuel", price: "dès 400€/mois" },
-  { n: "02", slug: "les-4-saisons",     t: "Les 4 Saisons",     d: "Pack trimestriel : charte saisonnière, calendrier édito, templates et 12 posts prêts à publier.", tag: "Trimestriel", price: "Pack signature" },
-  { n: "03", slug: "la-creative",       t: "La Créative",       d: "Direction artistique complète : charte Insta, palettes saisonnières, templates de posts et de stories.", tag: "Projet", price: "Sur devis" },
-  { n: "04", slug: "audit-coaching",    t: "L'Audit",           d: "Audit de ton compte, plan d'action et session de coaching pour reprendre la main en autonomie.", tag: "Ponctuel", price: "à partir de 150€" },
+  { n: "01", slug: "premiers-pas",  t: "Les Premiers Pas",  d: "Audit complet, positionnement, 10 recommandations concrètes et call de restitution. Livré en 7 jours.", tag: "Ponctuel", price: "270 € TTC" },
+  { n: "02", slug: "la-creative",   t: "La Créative",       d: "Charte visuelle, piliers de contenu, 1 mois de calendrier édito et 2 calls pour ancrer la méthode.", tag: "Signature", price: "dès 545 € TTC" },
+  { n: "03", slug: "quatre-saisons", t: "Les Quatre Saisons", d: "Tout La Créative + 4 chartes saisonnières + bibliothèque réutilisable + accompagnement 12 mois.", tag: "Engagement", price: "dès 880 € TTC" },
+  { n: "04", slug: "sur-mesure",    t: "Sur-Mesure",        d: "Gestion complète, création photo/vidéo, Pinterest, refonte ou formation 1:1. Pour tout besoin hors cadre.", tag: "Devis", price: "TJ 450 € HT" },
 ];
 
 function Services() {
@@ -59,15 +59,19 @@ function Services() {
             </div>
             <h3 style={{ fontFamily: "var(--serif-display)", color: "var(--fg-heading)", fontSize: 24, margin: "4px 0 0", lineHeight: 1.05 }}>{o.t}</h3>
             <p className="p" style={{ fontSize: 15 }}>{o.d}</p>
-            <div style={{ marginTop: "auto", paddingTop: 12, borderTop: "1px dashed color-mix(in srgb, var(--border) 60%, transparent)", display: "flex", flexDirection: "column", gap: 10 }}>
-              <span className="caption" style={{ fontSize: 13, fontFamily: "var(--script)", color: "var(--accent)", fontSize: 22, lineHeight: 0.9 }}>{o.price}</span>
+            <div style={{ marginTop: "auto", paddingTop: 14, borderTop: "1px dashed color-mix(in srgb, var(--border) 60%, transparent)", display: "flex", flexDirection: "column", gap: 8 }}>
+              <span style={{ fontFamily: "var(--serif-display)", color: "var(--fg-heading)", fontSize: 22, lineHeight: 1.0, letterSpacing: "-0.01em" }}>{o.price}</span>
               <a href={`prestations.html#${o.slug}`} style={{ display: "inline-flex", alignItems: "center", gap: 7, fontFamily: "var(--serif-body)", color: "var(--link)", textDecoration: "underline", textUnderlineOffset: 3, fontSize: 15 }} className="ccs-navlink">En savoir plus <span className="ccs-btn-arrow" style={{ display: "inline-flex" }}><Icon name="arrow-right" size={14} /></span></a>
             </div>
           </article>
         ))}
       </div>
-      <div className="reveal" style={{ "--d": "500ms", display: "flex", justifyContent: "center", marginTop: 44 }}>
+      <div className="reveal" style={{ "--d": "500ms", display: "flex", flexDirection: "column", alignItems: "center", gap: 16, marginTop: 48 }}>
         <Button variant="primary" icon="arrow-right" onClick={() => window.location.href = "prestations.html"}>Voir toutes les prestations en détail</Button>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, fontFamily: "var(--serif-body)", fontSize: 15, color: "var(--fg2)" }}>
+          <span style={{ fontFamily: "var(--script)", color: "var(--accent)", fontSize: 22, lineHeight: 0.9 }}>ou</span>
+          <a href="#contact" onClick={(e) => { e.preventDefault(); window.ccsScrollTo("contact"); }} style={{ color: "var(--link)", textDecoration: "underline", textUnderlineOffset: 3 }}>réservez un appel découverte de 30 min · <em style={{ color: "var(--accent)", fontStyle: "normal" }}>gratuit</em></a>
+        </div>
       </div>
     </section>
   );
@@ -147,13 +151,14 @@ function About({ season }) {
       <section id="apropos" className="wrap" style={{ padding: "84px 40px" }}>
         <div className="grid-about" style={{ display: "grid", gridTemplateColumns: "1fr 1.3fr", gap: 56, alignItems: "center" }}>
           <div className="reveal" style={{ position: "relative", aspectRatio: "4/5", borderRadius: 28, overflow: "hidden", boxShadow: "var(--shadow-card)" }}>
-            <div className={`gingham gingham--${season}`} style={{ position: "absolute", inset: 0 }} />
-            <div style={{ position: "absolute", inset: 0, display: "grid", placeItems: "center" }}>
-              <div className="float" style={{ "--float-dur": "7.5s", display: "grid", placeItems: "center", padding: 24 }}>
-                <img src={ABOUT_ART[season]} alt="Illustration aquarelle saisonnière" style={{ maxWidth: "62%", maxHeight: 280, width: "auto", filter: "drop-shadow(0 12px 24px rgba(112,88,70,.20))" }} />
-              </div>
+            <img src={`${ASSET}/lifestyle/portrait-clemence.jpg`} alt="Portrait de Clémence en robe vichy devant des fleurs blanches, Paris" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+            {/* season-tinted gradient overlay for cohesion */}
+            <div className={`gingham gingham--${season}`} style={{ position: "absolute", inset: 0, opacity: 0.18, mixBlendMode: "multiply" }} />
+            {/* small floating illustration in corner */}
+            <div className="float" style={{ "--float-dur": "8s", position: "absolute", right: 14, top: 14, padding: 8, background: "color-mix(in srgb, var(--surface) 92%, transparent)", borderRadius: 16, backdropFilter: "blur(6px)" }}>
+              <img src={ABOUT_ART[season]} alt="Illustration aquarelle saisonnière" style={{ width: 56, height: "auto", filter: "drop-shadow(0 6px 12px rgba(112,88,70,.18))" }} />
             </div>
-            <span style={{ position: "absolute", left: 18, bottom: 18, fontFamily: "var(--serif-body)", fontSize: 12, color: "var(--fg-strong)", background: "color-mix(in srgb, var(--surface) 86%, transparent)", padding: "5px 12px", borderRadius: 999, backdropFilter: "blur(4px)" }}>Photo Clémence · à insérer</span>
+            <span style={{ position: "absolute", left: 18, bottom: 18, fontFamily: "var(--script)", fontSize: 26, color: "var(--surface)", textShadow: "0 2px 8px rgba(0,0,0,.35)", lineHeight: 0.9 }}>Clémence, Paris</span>
           </div>
           <div>
             <div className="reveal eyebrow" style={{ marginBottom: 16 }}>À propos de moi</div>
