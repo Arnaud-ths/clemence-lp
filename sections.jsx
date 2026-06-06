@@ -43,7 +43,7 @@ const OFFERS = [
   { n: "01", slug: "premiers-pas",  t: "Les Premiers Pas",  d: "Audit complet, positionnement, 10 recommandations concrètes et call de restitution. Livré en 7 jours.", tag: "Ponctuel",  price: "270 € TTC",     img: `${ASSET}/lifestyle/work-cottagecore.jpg` },
   { n: "02", slug: "la-creative",   t: "La Créative",       d: "Charte visuelle, piliers de contenu, 1 mois de calendrier édito et 2 calls pour ancrer la méthode.",   tag: "Signature",  price: "dès 545 € TTC", img: `${ASSET}/lifestyle/clemence-robe-verte.jpg` },
   { n: "03", slug: "quatre-saisons", t: "Les Quatre Saisons", d: "Tout La Créative + 4 chartes saisonnières + bibliothèque réutilisable + accompagnement 12 mois.",     tag: "Engagement", price: "dès 880 € TTC", img: `${ASSET}/lifestyle/interieur-fleurs.jpg` },
-  { n: "04", slug: "sur-mesure",    t: "La Sur-Mesure & Options", d: "Gestion complète, création photo/vidéo, Pinterest, refonte ou formation 1:1. Pour tout besoin hors cadre.", tag: "Devis", price: "TJ 450 € HT", img: `${ASSET}/lifestyle/portrait-clemence.jpg` },
+  { n: "04", slug: "sur-mesure",    t: "La Sur-Mesure & Options", d: "Gestion complète, création photo/vidéo, Pinterest, refonte ou formation 1:1. Pour tout besoin hors cadre.", tag: "Devis", price: "TJ 450 € HT", img: `${ASSET}/lifestyle/clemence-vichy-livre.jpg` },
 ];
 
 function Services() {
@@ -161,7 +161,7 @@ function About({ season }) {
       <section id="apropos" className="wrap" style={{ padding: "84px 40px" }}>
         <div className="grid-about" style={{ display: "grid", gridTemplateColumns: "1fr 1.3fr", gap: 56, alignItems: "center" }}>
           <div className="reveal" style={{ position: "relative", aspectRatio: "4/5", borderRadius: 28, overflow: "hidden", boxShadow: "var(--shadow-card)" }}>
-            <img src={`${ASSET}/lifestyle/portrait-clemence.jpg`} alt="Portrait de Clémence en robe vichy devant des fleurs blanches, Paris" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+            <img src={`${ASSET}/lifestyle/clemence-vichy-livre.jpg`} alt="Portrait de Clémence en robe vichy devant des fleurs blanches, Paris" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
             {/* season-tinted gradient overlay for cohesion */}
             <div className={`gingham gingham--${season}`} style={{ position: "absolute", inset: 0, opacity: 0.18, mixBlendMode: "multiply" }} />
             {/* small floating illustration in corner */}
