@@ -13,14 +13,55 @@
   /* Page Prestations — bento cards animées          */
   /* ════════════════════════════════════════════════ */
 
-  /* HERO */
+  /* HERO — motif vichy signature */
   .pp-hero {
-    position: relative; min-height: 64vh; display: flex; align-items: flex-end;
+    position: relative; min-height: 60vh; display: flex; align-items: flex-end;
+    padding: 0 0 64px;
+    overflow: hidden;
+  }
+  /* gingham layer (use existing .gingham class wrapping inside) */
+  .pp-hero-bg {
+    position: absolute; inset: 0;
+    --gingham-size: 22px;
+    --gingham-color: var(--ccs-sage);
+    background-color: var(--ccs-cream);
     background-image:
-      linear-gradient(to top, color-mix(in srgb, var(--bg) 92%, transparent) 0%, color-mix(in srgb, var(--bg) 35%, transparent) 55%, color-mix(in srgb, var(--bg) 10%, transparent) 100%),
-      url("assets/lifestyle/cerisiers-2.jpg");
-    background-size: cover; background-position: center 30%; background-attachment: fixed;
-    padding: 0 0 56px;
+      repeating-linear-gradient(0deg,
+        transparent 0 calc(var(--gingham-size) / 2),
+        color-mix(in srgb, var(--gingham-color) 45%, transparent) calc(var(--gingham-size) / 2) var(--gingham-size)),
+      repeating-linear-gradient(90deg,
+        transparent 0 calc(var(--gingham-size) / 2),
+        color-mix(in srgb, var(--gingham-color) 45%, transparent) calc(var(--gingham-size) / 2) var(--gingham-size));
+  }
+  .pp-hero-bg::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg,
+      color-mix(in srgb, var(--bg) 30%, transparent) 0%,
+      color-mix(in srgb, var(--bg) 55%, transparent) 60%,
+      var(--bg) 100%);
+  }
+  .pp-hero-inner-wrap { position: relative; z-index: 2; width: 100%; }
+  /* floating decorative accent */
+  .pp-hero-accent {
+    position: absolute;
+    top: 36px; right: 56px;
+    width: 96px; height: 96px;
+    background: var(--surface);
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-family: var(--script);
+    color: var(--accent);
+    font-size: 38px;
+    line-height: 1;
+    box-shadow: 0 10px 24px rgba(112,88,70,.18);
+    transform: rotate(-8deg);
+    z-index: 3;
+    animation: hero-badge-bob 4.6s ease-in-out infinite;
+  }
+  @keyframes hero-badge-bob {
+    0%, 100% { transform: rotate(-8deg) translateY(0); }
+    50% { transform: rotate(-4deg) translateY(-8px); }
   }
   .pp-hero-inner { padding: 0 40px 0; width: 100%; max-width: 1200px; margin: 0 auto; }
   .pp-hero h1 { font-family: var(--serif-display); color: var(--fg-heading); font-size: clamp(54px, 8vw, 116px); line-height: 0.94; margin: 0; letter-spacing: -0.02em; max-width: 14ch; text-shadow: 0 2px 16px rgba(248,243,227,.45); }
@@ -100,20 +141,20 @@
     margin: 20px auto 0; max-width: 52ch; line-height: 1.5;
   }
 
-  /* Bento grid layout */
+  /* Grid 2×2 simple et lisible */
   .pp-bento-grid {
     display: grid;
-    grid-template-columns: 1fr 1.5fr 1fr;
-    grid-template-rows: 340px 340px;
-    gap: 18px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
     position: relative;
     z-index: 2;
     perspective: 1400px;
   }
 
-  /* Cards */
+  /* Cards — toutes égales en taille */
   .pp-bcard {
     position: relative;
+    height: 420px;
     border-radius: 26px;
     overflow: hidden;
     text-decoration: none;
@@ -121,27 +162,21 @@
     box-shadow: 0 12px 32px rgba(112,88,70,.10);
     transform-style: preserve-3d;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
     /* initial reveal state */
     opacity: 0;
-    transform: translateY(48px) rotate(-1.8deg) scale(.96);
+    transform: translateY(40px) scale(.97);
     transition: opacity .9s ease, transform .9s cubic-bezier(.16,1.05,.4,1), box-shadow .5s ease;
     will-change: transform, opacity;
   }
   .pp-bcard.is-revealed {
     opacity: 1;
-    transform: translateY(0) rotate(0) scale(1);
+    transform: translateY(0) scale(1);
   }
   .pp-bcard:hover {
     box-shadow: 0 30px 60px rgba(112,88,70,.22), 0 8px 18px rgba(112,88,70,.10);
   }
-
-  /* Grid positions */
-  .pp-bcard-01 { grid-column: 1; grid-row: 1; }
-  .pp-bcard-02 { grid-column: 2; grid-row: 1 / 3; }
-  .pp-bcard-03 { grid-column: 3; grid-row: 1; }
-  .pp-bcard-04 { grid-column: 1 / 4; grid-row: 2; }
-  .pp-bcard-04 { display: grid; grid-template-columns: 1fr 1fr; }
-  .pp-bcard-03 ~ .pp-bcard-03b { grid-column: 3; grid-row: 2; } /* fallback if needed */
 
   /* Image layer */
   .pp-bcard-img {
@@ -265,28 +300,21 @@
     gap: 11px;
   }
 
-  /* Flagship variant — La Créative */
+  /* Signature variant — La Créative (subtle accent border + ribbon) */
   .pp-bcard-02 {
     border: 2px solid color-mix(in srgb, var(--accent) 60%, transparent);
   }
-  .pp-bcard-02 .pp-bcard-title { font-size: 52px; }
-  .pp-bcard-02 .pp-bcard-price { font-size: 28px; }
-  .pp-bcard-02 .pp-bcard-tag {
-    background: var(--accent);
-    color: var(--on-accent);
-    border-color: var(--accent);
-  }
   .pp-bcard-02::before {
-    content: "✿ Signature du studio";
+    content: "✿ Signature";
     position: absolute;
-    top: 18px; right: 18px;
+    top: 16px; right: 16px;
     z-index: 4;
     background: var(--accent);
     color: var(--on-accent);
     font-family: var(--serif-body);
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    padding: 7px 14px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    padding: 6px 12px;
     border-radius: 999px;
     text-transform: uppercase;
     box-shadow: 0 6px 16px rgba(0,0,0,.18);
@@ -294,50 +322,7 @@
   }
   @keyframes ribbon-pulse {
     0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.04); }
-  }
-
-  /* Sur-Mesure (wide bottom) — split layout with text right of image */
-  .pp-bcard-04 .pp-bcard-img {
-    position: relative;
-    grid-column: 1;
-  }
-  .pp-bcard-04 .pp-bcard-gradient {
-    background: linear-gradient(to right, rgba(35,28,22,.78) 0%, rgba(35,28,22,.40) 50%, rgba(35,28,22,.10) 100%);
-  }
-  .pp-bcard-04 .pp-bcard-content {
-    position: relative;
-    grid-column: 2;
-    background: color-mix(in srgb, var(--surface) 96%, transparent);
-    color: var(--fg-heading);
-    padding: 36px 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .pp-bcard-04 .pp-bcard-tag {
-    background: color-mix(in srgb, var(--accent) 14%, transparent);
-    color: var(--accent);
-    border-color: color-mix(in srgb, var(--accent) 40%, transparent);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-  .pp-bcard-04 .pp-bcard-title { font-size: 38px; text-shadow: none; color: var(--fg-heading); }
-  .pp-bcard-04 .pp-bcard-title .script { color: var(--accent); }
-  .pp-bcard-04 .pp-bcard-price { color: var(--fg-heading); text-shadow: none; }
-  .pp-bcard-04 .pp-bcard-includes { color: var(--fg1); opacity: 1; }
-  .pp-bcard-04 .pp-bcard-cta {
-    background: var(--accent);
-    color: var(--on-accent);
-    border: none;
-    align-self: flex-start;
-    margin-top: 10px;
-  }
-  .pp-bcard-04 .pp-bcard-reveal {
-    /* always visible on the wide card */
-    max-height: 260px;
-    opacity: 1;
-    margin-top: 14px;
+    50% { transform: scale(1.06); }
   }
 
   /* TJ band */
@@ -373,28 +358,11 @@
   .pp-final .btn-prim:hover, .pp-final .btn-ghost:hover { transform: translateY(-2px); }
 
   /* Responsive */
-  @media (max-width: 980px) {
-    .pp-bento-grid {
-      grid-template-columns: 1fr;
-      grid-template-rows: auto;
-      gap: 16px;
-    }
-    .pp-bcard-01, .pp-bcard-02, .pp-bcard-03, .pp-bcard-04 {
-      grid-column: 1 !important;
-      grid-row: auto !important;
-      height: 320px;
-    }
-    .pp-bcard-02 { height: 380px; }
-    .pp-bcard-04 { grid-template-columns: 1fr; height: auto; min-height: 400px; }
-    .pp-bcard-04 .pp-bcard-img { position: absolute; }
-    .pp-bcard-04 .pp-bcard-content { position: absolute; bottom: 0; background: transparent; color: #fff; }
-    .pp-bcard-04 .pp-bcard-title { color: #fff; text-shadow: 0 2px 16px rgba(0,0,0,.4); }
-    .pp-bcard-04 .pp-bcard-title .script { color: #fff; }
-    .pp-bcard-04 .pp-bcard-price { color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,.3); }
-    .pp-bcard-04 .pp-bcard-includes { color: rgba(255,255,255,.92); }
-  }
-  @media (max-width: 880px) {
-    .pp-hero { background-attachment: scroll; min-height: 56vh; }
+  @media (max-width: 760px) {
+    .pp-bento-grid { grid-template-columns: 1fr; gap: 18px; }
+    .pp-bcard { height: 360px; }
+    .pp-hero { min-height: 52vh; }
+    .pp-hero-accent { width: 76px; height: 76px; font-size: 30px; top: 20px; right: 20px; }
     .pp-tj-inner { grid-template-columns: 1fr; gap: 28px; }
     .pp-discovery { flex-direction: column; gap: 10px; padding: 14px 24px; text-align: center; }
   }
@@ -429,10 +397,14 @@
 
   <!-- ═══ HERO ═══ -->
   <section class="pp-hero">
-    <div class="pp-hero-inner">
-      <div class="eyebrow">Les prestations</div>
-      <h1>Quatre formules,<br /><span class="script">cousues main.</span></h1>
-      <p>Du diagnostic ponctuel à la gestion saisonnière sur 12 mois. Trois cadres pensés, et un quatrième entièrement à votre image.</p>
+    <div class="pp-hero-bg" aria-hidden="true"></div>
+    <div class="pp-hero-accent" aria-hidden="true">✿</div>
+    <div class="pp-hero-inner-wrap">
+      <div class="pp-hero-inner">
+        <div class="eyebrow">Les prestations</div>
+        <h1>Quatre formules,<br /><span class="script">cousues main.</span></h1>
+        <p>Du diagnostic ponctuel à la gestion saisonnière sur 12 mois. Trois cadres pensés, et un quatrième entièrement à votre image.</p>
+      </div>
     </div>
   </section>
 
