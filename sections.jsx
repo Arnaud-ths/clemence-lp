@@ -204,4 +204,50 @@ function Contact({ season }) {
   );
 }
 
-Object.assign(window, { Marquee, Services, Methode, About, Testimonial, Contact, ABOUT_ART });
+/* ── INSTAGRAM TEASER ── */
+const IG_HANDLE = "clemence.creativestudio";
+const IG_URL = `https://instagram.com/${IG_HANDLE}`;
+const IG_GRID = [
+  `${ASSET}/instagram-grid/portfolio-01.jpg`,
+  `${ASSET}/instagram-grid/proj-14.jpg`,
+  `${ASSET}/instagram-grid/portfolio-02.jpg`,
+  `${ASSET}/instagram-grid/proj-20.jpg`,
+  `${ASSET}/instagram-grid/proj-24.jpg`,
+  `${ASSET}/instagram-grid/proj-15.jpg`,
+  `${ASSET}/instagram-grid/portfolio-03.jpg`,
+  `${ASSET}/instagram-grid/proj-21.jpg`,
+];
+
+function InstagramTeaser() {
+  return (
+    <section id="instagram" className="wrap" style={{ padding: "96px 40px 88px", borderTop: "1px solid color-mix(in srgb, var(--border) 30%, transparent)" }}>
+      <SectionHead
+        eyebrow="Le feed, IRL"
+        title={<>Un avant-goût <span style={{ fontFamily: "var(--script)", color: "var(--accent)", fontSize: "1.15em", lineHeight: 0.9 }}>du studio</span>.</>}
+        note={<>Posts, stories, coulisses.<br />Le quotidien d'une SMM à Paris.</>}
+      />
+      <div className="reveal" style={{ "--d": "60ms", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 10, marginBottom: 40 }}>
+        {IG_GRID.map((src, i) => (
+          <a key={i} href={IG_URL} target="_blank" rel="noopener noreferrer"
+             style={{ position: "relative", aspectRatio: "1/1", borderRadius: 14, overflow: "hidden", boxShadow: "var(--shadow-soft)", display: "block", textDecoration: "none" }}
+             className="ig-tile">
+            <img src={src} alt={`Post Instagram Clémence ${i + 1}`} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform .6s var(--ease-soft, ease)" }} />
+            <span className="ig-tile-hover" style={{ position: "absolute", inset: 0, background: "color-mix(in srgb, var(--accent) 55%, transparent)", display: "flex", alignItems: "center", justifyContent: "center", opacity: 0, transition: "opacity .25s ease" }}>
+              <Icon name="instagram" size={26} stroke={1.6} style={{ color: "var(--surface)" }} />
+            </span>
+          </a>
+        ))}
+      </div>
+      <div className="reveal" style={{ "--d": "140ms", display: "flex", flexDirection: "column", alignItems: "center", gap: 14, textAlign: "center" }}>
+        <div style={{ fontFamily: "var(--script)", color: "var(--fg-heading)", fontSize: 38, lineHeight: 1 }}>@{IG_HANDLE}</div>
+        <Button variant="primary" icon="instagram" onClick={() => window.open(IG_URL, "_blank", "noopener")}>Me suivre sur Instagram</Button>
+      </div>
+      <style>{`
+        .ig-tile:hover .ig-tile-hover { opacity: 1; }
+        .ig-tile:hover img { transform: scale(1.06); }
+      `}</style>
+    </section>
+  );
+}
+
+Object.assign(window, { Marquee, Services, Methode, About, Testimonial, Contact, InstagramTeaser, ABOUT_ART, IG_HANDLE, IG_URL });
