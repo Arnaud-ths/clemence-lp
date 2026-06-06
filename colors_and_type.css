@@ -226,6 +226,38 @@
 [data-season="autumn"] { --accent: var(--ccs-autumn-rust); --accent-soft: var(--ccs-autumn-peach); --fg-heading: var(--ccs-autumn-chestnut); --fg1: var(--ccs-autumn-chestnut); }
 [data-season="winter"] { --bg: var(--ccs-winter-snow); --accent: var(--ccs-winter-navy); --accent-soft: var(--ccs-winter-ice); --fg-heading: var(--ccs-winter-navy); --fg1: #3a3f6e; }
 
+/* ──────────────────────────────────────────────────────────────────
+   PAGE-WIDE SEASONAL ATMOSPHERE
+   Soft radial gradients in opposite corners + transition smooth.
+   ────────────────────────────────────────────────────────────────── */
+[data-season] {
+  background-image:
+    radial-gradient(ellipse 800px 600px at 100% 0%, color-mix(in srgb, var(--accent-soft) 32%, transparent) 0%, transparent 60%),
+    radial-gradient(ellipse 700px 500px at 0% 100%, color-mix(in srgb, var(--accent) 12%, transparent) 0%, transparent 55%);
+  background-attachment: fixed;
+  transition: background-color .8s ease, color .8s ease;
+}
+[data-season="spring"] {
+  background-image:
+    radial-gradient(ellipse 900px 700px at 90% -10%, color-mix(in srgb, var(--ccs-sage) 28%, transparent) 0%, transparent 65%),
+    radial-gradient(ellipse 700px 500px at -5% 90%, color-mix(in srgb, var(--ccs-spring-rose) 38%, transparent) 0%, transparent 55%);
+}
+[data-season="summer"] {
+  background-image:
+    radial-gradient(ellipse 900px 700px at 95% -10%, color-mix(in srgb, var(--ccs-summer-sun) 36%, transparent) 0%, transparent 65%),
+    radial-gradient(ellipse 700px 500px at -5% 95%, color-mix(in srgb, var(--ccs-summer-blush) 42%, transparent) 0%, transparent 55%);
+}
+[data-season="autumn"] {
+  background-image:
+    radial-gradient(ellipse 900px 700px at 95% -10%, color-mix(in srgb, var(--ccs-autumn-pumpkin) 30%, transparent) 0%, transparent 65%),
+    radial-gradient(ellipse 700px 500px at -5% 95%, color-mix(in srgb, var(--ccs-autumn-peach) 42%, transparent) 0%, transparent 55%);
+}
+[data-season="winter"] {
+  background-image:
+    radial-gradient(ellipse 900px 700px at 95% -10%, color-mix(in srgb, var(--ccs-winter-ice) 50%, transparent) 0%, transparent 65%),
+    radial-gradient(ellipse 700px 500px at -5% 95%, color-mix(in srgb, var(--ccs-winter-fog) 40%, transparent) 0%, transparent 55%);
+}
+
 /* ════════════════════════════════════════════════════════════════
    FOCUS — always visible, forest-deep on cream = 7.94 (AAA)
    ════════════════════════════════════════════════════════════════ */

@@ -102,7 +102,6 @@ function Nav({ season, setSeason, onContact, onNav }) {
           ))}
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-          <div className="ccs-seasonwrap-nav"><SeasonSwitcher season={season} setSeason={setSeason} /></div>
           <Button variant="primary" onClick={onContact}>Travailler ensemble</Button>
         </div>
       </nav>
@@ -114,7 +113,30 @@ function Footer({ season, setSeason, onNav }) {
   return (
     <footer className={`gingham gingham--${season}`} style={{ borderTop: "1px solid var(--border)" }}>
       <div style={{ background: "color-mix(in srgb, var(--bg) 80%, transparent)" }}>
-        <div className="wrap grid-about" style={{ padding: "66px 40px 40px", display: "grid", gridTemplateColumns: "1.5fr 1fr 1.2fr", gap: 40 }}>
+
+        {/* ── Bandeau saisonnier proéminent ── */}
+        <div className="wrap" style={{ padding: "56px 40px 36px", textAlign: "center", borderBottom: "1px solid color-mix(in srgb, var(--border) 30%, transparent)" }}>
+          <div className="eyebrow" style={{ marginBottom: 14 }}>Le studio change avec les saisons</div>
+          <h3 style={{ fontFamily: "var(--serif-display)", color: "var(--fg-heading)", fontSize: "clamp(28px, 3.6vw, 40px)", margin: "0 0 8px", lineHeight: 1.05 }}>
+            Choisis la <span style={{ fontFamily: "var(--script)", color: "var(--accent)", fontSize: "1.16em", lineHeight: 0.9 }}>saison</span> qui te ressemble.
+          </h3>
+          <p className="p" style={{ fontSize: 15, maxWidth: "44ch", margin: "0 auto 12px" }}>
+            Palette, illustrations, motifs : tout s'ajuste à la saison choisie.
+          </p>
+          {/* Motto saisonnier qui change */}
+          <p style={{ fontFamily: "var(--script)", color: "var(--accent)", fontSize: 28, lineHeight: 0.95, margin: "16px auto 28px", maxWidth: "30ch" }}>
+            {{ spring: "Tout repousse, tout reprend.",
+               summer: "Pleine lumière, pleine joie.",
+               autumn: "Doré comme une saison qui sait.",
+               winter: "Au chaud, on prépare l'année." }[season]}
+          </p>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <SeasonSwitcher season={season} setSeason={setSeason} />
+          </div>
+        </div>
+
+        {/* ── Contenu footer ── */}
+        <div className="wrap grid-about" style={{ padding: "44px 40px 32px", display: "grid", gridTemplateColumns: "1.5fr 1fr 1.2fr", gap: 40 }}>
           <div>
             <Wordmark size={1.15} />
             <p className="p" style={{ marginTop: 18, fontSize: 16, maxWidth: "32ch", color: "var(--fg1)" }}>Direction artistique &amp; stratégie social pour les marques lifestyle artisanales. Installée à Paris. 🤍</p>
@@ -141,9 +163,8 @@ function Footer({ season, setSeason, onNav }) {
             <a href="mailto:clemence.creativestudio@outlook.com" style={{ display: "flex", alignItems: "center", gap: 9, fontFamily: "var(--serif-body)", color: "var(--fg1)", textDecoration: "none", fontSize: 16 }} className="ccs-navlink"><Icon name="mail" size={18} /> clemence.creativestudio@outlook.com</a>
           </div>
         </div>
-        <div className="wrap stack-sm" style={{ padding: "20px 40px 40px", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 18, borderTop: "1px solid color-mix(in srgb, var(--border) 35%, transparent)" }}>
+        <div className="wrap stack-sm" style={{ padding: "20px 40px 40px", display: "flex", justifyContent: "center", alignItems: "center", gap: 18, borderTop: "1px solid color-mix(in srgb, var(--border) 35%, transparent)" }}>
           <span className="caption">© 2026 Clémence Creative Studio · Paris · <span style={{ fontFamily: "var(--script)", fontSize: 18, color: "var(--fg-heading)" }}>fait avec soin</span></span>
-          <SeasonSwitcher season={season} setSeason={setSeason} />
         </div>
       </div>
     </footer>

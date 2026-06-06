@@ -55,9 +55,20 @@
     });
   }
 
+  // Auto-détection saison via mois courant (hémisphère nord)
+  // Mars-Mai → printemps · Juin-Août → été · Sept-Nov → automne · Déc-Fév → hiver
+  function autoSeason() {
+    const m = new Date().getMonth(); // 0-11
+    if (m >= 2 && m <= 4)  return "spring";
+    if (m >= 5 && m <= 7)  return "summer";
+    if (m >= 8 && m <= 10) return "autumn";
+    return "winter";
+  }
+
   function App() {
     const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
-    const [season, setSeason] = React.useState(() => localStorage.getItem("ccs-season") || "spring");
+    // priorité : sélection utilisateur sauvegardée > saison du mois courant > printemps
+    const [season, setSeason] = React.useState(() => localStorage.getItem("ccs-season") || autoSeason());
     React.useEffect(() => { localStorage.setItem("ccs-season", season); }, [season]);
 
     // lucide icons after each render
