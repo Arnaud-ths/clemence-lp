@@ -1,0 +1,80 @@
+/* ════════════════════════════════════════════════════════════════
+   Clémence Creative Studio — site one-page
+   Animation system + page chrome on top of colors_and_type.css
+   ════════════════════════════════════════════════════════════════ */
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--fg1); -webkit-font-smoothing: antialiased; transition: background var(--dur-slow) var(--ease-soft); }
+img { display: block; }
+
+/* shared section width */
+.wrap { max-width: 1180px; margin: 0 auto; padding-left: 40px; padding-right: 40px; }
+
+/* ─── ENTRANCE + SCROLL REVEAL ───
+   Resting state is FULLY VISIBLE in CSS. Motion is driven in JS via the Web
+   Animations API (see index.html): elements are armed (opacity 0) by JS only
+   if reduced-motion is off, then animated in. So screenshots, print, and any
+   JS-off / settled context always render the content — never a stuck opacity:0. */
+.rise-word { display: inline-block; }
+
+/* ─── FLOATING WATERCOLOURS (motion-safe only) ─── */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes ccs-float { 0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); } 50% { transform: translateY(-16px) rotate(var(--rot, 0deg)); } }
+  .float { animation: ccs-float var(--float-dur, 7s) ease-in-out infinite; will-change: transform; }
+}
+
+/* ─── REDUCED MOTION: kill decorative loops ─── */
+@media (prefers-reduced-motion: reduce) {
+  .ccs-marquee { animation: none !important; }
+}
+
+/* ─── MARQUEE ─── */
+.ccs-marquee { animation: ccs-scroll var(--marquee-dur, 28s) linear infinite; }
+@keyframes ccs-scroll { from { transform: translateX(0); } to { transform: translateX(-33.333%); } }
+.ccs-marquee-wrap:hover .ccs-marquee { animation-play-state: paused; }
+
+/* ─── BUTTONS / LINKS / CARDS ─── */
+.ccs-navlink { transition: color var(--dur-fast) var(--ease-soft); }
+.ccs-navlink:hover { color: var(--accent) !important; }
+.ccs-btn { transition: transform var(--dur-fast) var(--ease-soft), filter var(--dur-base) var(--ease-soft), box-shadow var(--dur-base) var(--ease-soft); }
+.ccs-btn:hover { filter: brightness(.95); box-shadow: var(--shadow-soft); }
+.ccs-btn--ghost:hover { background: var(--ccs-cream-deep) !important; filter: none; }
+.ccs-btn:active { transform: translateY(1px) scale(.99); }
+.ccs-btn .ccs-btn-arrow { transition: transform var(--dur-base) var(--ease-soft); }
+.ccs-btn:hover .ccs-btn-arrow { transform: translateX(4px); }
+
+.ccs-card { transition: box-shadow var(--dur-base) var(--ease-soft), transform var(--dur-base) var(--ease-soft), border-color var(--dur-base) var(--ease-soft); }
+.ccs-card:hover { box-shadow: var(--shadow-card); transform: translateY(-4px); border-color: color-mix(in srgb, var(--border) 75%, transparent); }
+
+.ccs-field { width: 100%; box-sizing: border-box; font-family: var(--serif-body); font-size: 16px; color: var(--fg1); background: var(--bg); border: 1px solid var(--border); border-radius: var(--field-radius, 12px); padding: 13px 16px; resize: vertical; transition: border-color var(--dur-base) var(--ease-soft), box-shadow var(--dur-base) var(--ease-soft), background var(--dur-base) var(--ease-soft); }
+.ccs-field::placeholder { color: color-mix(in srgb, var(--fg2) 60%, transparent); }
+.ccs-field:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent); background: var(--surface); }
+
+/* season dot in switcher */
+.ccs-season-btn { transition: background var(--dur-base) var(--ease-soft), color var(--dur-base) var(--ease-soft); }
+
+/* soft chip */
+.ccs-chip { font-family: var(--serif-body); text-transform: uppercase; letter-spacing: .12em; font-size: 11px; color: var(--fg-strong); background: var(--ccs-cream-deep); padding: 5px 12px; border-radius: 999px; }
+
+/* divider daisy line */
+.ccs-rule { height: 1px; background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--border) 55%, transparent), transparent); border: 0; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 980px) {
+  .wrap { padding-left: 26px; padding-right: 26px; }
+  .grid-hero, .grid-about, .grid-contact, .grid-2 { grid-template-columns: 1fr !important; }
+  .grid-hero { gap: 40px !important; }
+  .hero-visual { order: -1; }
+  .grid-3 { grid-template-columns: 1fr 1fr !important; }
+  .hide-tablet { display: none !important; }
+}
+@media (max-width: 680px) {
+  .wrap { padding-left: 18px; padding-right: 18px; }
+  .grid-3 { grid-template-columns: 1fr !important; }
+  .stack-sm { flex-direction: column !important; align-items: flex-start !important; }
+  .text-right-sm { text-align: left !important; }
+}
+@media (max-width: 880px) {
+  .ccs-navlinks, .ccs-seasonwrap-nav { display: none !important; }
+}

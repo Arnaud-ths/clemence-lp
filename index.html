@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Clémence Creative Studio — Social Media Manager · Paris</title>
+<link rel="stylesheet" href="colors_and_type.css" />
+<link rel="stylesheet" href="app.css" />
+<script src="https://unpkg.com/lucide@0.544.0/dist/umd/lucide.min.js"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script>
+  // safe smooth scroll (avoids scrollIntoView)
+  window.ccsScrollTo = function (id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var top = el.getBoundingClientRect().top + window.scrollY - 64;
+    window.scrollTo({ top: top, behavior: "smooth" });
+  };
+</script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="chrome.jsx"></script>
+<script type="text/babel" src="heroes.jsx"></script>
+<script type="text/babel" src="sections.jsx"></script>
+<script type="text/babel">
+  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "heroVariant": "editorial",
+    "marqueeSpeed": 8,
+    "vichySize": 16
+  }/*EDITMODE-END*/;
+
+  const HERO_LABELS = { editorial: "Éditorial", centered: "Centrée", collage: "Collage" };
+  const HERO_KEYS = { "Éditorial": "editorial", "Centrée": "centered", "Collage": "collage" };
+
+  // ── Motion (Web Animations API) — CSS resting state stays fully visible ──
+  const EASE_BLOOM = "cubic-bezier(.16,1.05,.4,1)";
+  const EASE_SOFT  = "cubic-bezier(.22,.61,.36,1)";
+  const REDUCED = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  const readDelay = (el) => { const v = el.style.getPropertyValue("--d"); return v ? parseFloat(v) : 0; };
+
+  function playEntrance(scope) {
+    if (REDUCED || !scope) return;
+    scope.querySelectorAll(".enter, .enter-bloom, .enter-fade, .rise-word").forEach((el) => {
+      if (!el.animate) return;
+      let from, dur, ease;
+      if (el.classList.contains("enter-bloom")) { from = { opacity: 0, transform: "scale(.92) translateY(16px)" }; dur = 880; ease = EASE_BLOOM; }
+      else if (el.classList.contains("enter-fade")) { from = { opacity: 0 }; dur = 460; ease = EASE_SOFT; }
+      else if (el.classList.contains("rise-word")) { from = { opacity: 0, transform: "translateY(22px)" }; dur = 720; ease = EASE_BLOOM; }
+      else { from = { opacity: 0, transform: "translateY(20px)" }; dur = 660; ease = EASE_SOFT; }
+      el.animate([from, { opacity: 1, transform: "none" }], { duration: dur, delay: readDelay(el), easing: ease, fill: "backwards" });
+    });
+  }
+
+  function App() {
+    const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+    const [season, setSeason] = React.useState(() => localStorage.getItem("ccs-season") || "spring");
+    React.useEffect(() => { localStorage.setItem("ccs-season", season); }, [season]);
+
+    // lucide icons after each render
+    React.useEffect(() => { if (window.lucide) window.lucide.createIcons(); });
+
+    // hero entrance — replays when the variant changes
+    React.useEffect(() => {
+      const id = requestAnimationFrame(() => playEntrance(document.getElementById("top")));
+      return () => cancelAnimationFrame(id);
+    }, [t.heroVariant]);
+
+    // scroll reveal — arm below-fold elements, animate in on intersect (WAAPI)
+    React.useEffect(() => {
+      if (REDUCED || !("IntersectionObserver" in window)) return; // leave everything visible
+      const vh = window.innerHeight;
+      const reveal = (el) => {
+        if (el.dataset.revealed) return;
+        el.dataset.revealed = "1";
+        if (el.animate) {
+          el.animate([{ opacity: 0, transform: "translateY(28px)" }, { opacity: 1, transform: "none" }],
+            { duration: 680, delay: readDelay(el), easing: EASE_SOFT, fill: "backwards" });
+        }
+        el.style.opacity = "";
+        el.style.transform = "";
+      };
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) { reveal(e.target); io.unobserve(e.target); } });
+      }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+      const arm = setTimeout(() => {
+        document.querySelectorAll(".reveal").forEach((el) => {
+          if (el.dataset.revealed) return;
+          if (el.getBoundingClientRect().top > vh * 0.9) el.style.opacity = "0"; // hide until revealed
+          io.observe(el);
+        });
+      }, 20);
+      return () => { clearTimeout(arm); io.disconnect(); };
+    }, [t.heroVariant, season]);
+
+    const marqueeDur = Math.round(76 - t.marqueeSpeed * 6); // speed 1→70s … 10→16s, default 8→28s
+    const goContact = () => window.ccsScrollTo("contact");
+    const onNav = (id) => window.ccsScrollTo(id);
+
+    return (
+      <div data-season={season} style={{ "--gingham-size": `${t.vichySize}px` }}>
+        <Nav season={season} setSeason={setSeason} onContact={goContact} onNav={onNav} />
+        <main>
+          <Hero variant={t.heroVariant} season={season} onContact={goContact} />
+          <Marquee dur={marqueeDur} />
+          <Services />
+          <Methode />
+          <About season={season} />
+          <Testimonial />
+          <Contact season={season} />
+        </main>
+        <Footer season={season} setSeason={setSeason} onNav={onNav} />
+
+        <TweaksPanel>
+          <TweakSection label="Hero — 3 directions à comparer" />
+          <TweakRadio label="Mise en page" value={HERO_LABELS[t.heroVariant]}
+            options={["Éditorial", "Centrée", "Collage"]}
+            onChange={(v) => setTweak("heroVariant", HERO_KEYS[v])} />
+          <TweakSection label="Motion & motif" />
+          <TweakSlider label="Vitesse du ruban" value={t.marqueeSpeed} min={1} max={10} step={1}
+            onChange={(v) => setTweak("marqueeSpeed", v)} />
+          <TweakSlider label="Taille du vichy" value={t.vichySize} min={8} max={30} step={1} unit="px"
+            onChange={(v) => setTweak("vichySize", v)} />
+        </TweaksPanel>
+      </div>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>

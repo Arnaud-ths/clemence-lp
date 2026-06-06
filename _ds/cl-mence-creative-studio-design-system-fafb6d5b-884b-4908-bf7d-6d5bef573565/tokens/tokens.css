@@ -1,0 +1,238 @@
+/* ──────────────────────────────────────────────────────────
+   Clémence Creative Studio — Design Tokens
+   Source : Canva charte DAHFg4y11js · extraction 2026-05-28
+   ────────────────────────────────────────────────────────── */
+
+/* Système typographique à 2+1 polices (décision finale 2026-05-28) :
+   · Pompiere       — titres (display rétro élégant, Google Fonts)
+   · Fraunces       — body + texte courant (serif chaleureux variable, Google Fonts)
+   · Meow Script    — accent magique très rare (cover, accroche unique) */
+@import url('https://fonts.googleapis.com/css2?family=Pompiere&family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Meow+Script&display=swap');
+
+:root {
+  /* ───── COULEURS — Base ───── */
+  --ccs-cream:        #f8f3e3;
+  --ccs-cream-light:  #fdf6e1;
+  --ccs-earth:        #8b725d;
+  --ccs-forest:       #457d58;
+  --ccs-sage:         #9bbf9f;
+
+  /* ───── COULEURS — Variantes "deep" pour accessibilité (WCAG AA+) ─────
+     Voir accessibility.md. Mêmes teintes, luminance plus basse pour passer
+     les ratios de contraste sur texte courant, liens et bordures. */
+  --ccs-earth-deep:   #705846; /* 5.96 sur cream — AA — body text défaut */
+  --ccs-forest-deep:  #2d523c; /* 7.94 sur cream — AAA — liens, focus, labels */
+  --ccs-sage-deep:    #527958; /* 4.47 sur cream — AA-large — borders, ribbons */
+
+  /* ───── COULEURS — Saisonnières ───── */
+  /* Printemps */
+  --ccs-spring-primary:   var(--ccs-forest);
+  --ccs-spring-secondary: var(--ccs-sage);
+  --ccs-spring-surface:   var(--ccs-cream-light);
+  --ccs-spring-accent:    #f4d2d2;
+
+  /* Été — palette estivale (bleu/rose/jaune/orange/lila) */
+  --ccs-summer-sky:       #bcd4ec;
+  --ccs-summer-blush:     #f6c4c8;
+  --ccs-summer-coral:     #ef7c6f;
+  --ccs-summer-sun:       #f7d56b;
+  --ccs-summer-tangerine: #ef9a55;
+  --ccs-summer-lavender:  #d9c6e6;
+
+  /* Automne */
+  --ccs-autumn-chestnut:  #5a342a;
+  --ccs-autumn-rust:      #b85e2c;
+  --ccs-autumn-pumpkin:   #e87b2d;
+  --ccs-autumn-peach:     #f3d2a0;
+
+  /* Hiver */
+  --ccs-winter-navy:      #0f1463;
+  --ccs-winter-ice:       #c7daf5;
+  --ccs-winter-snow:      #faf3df;
+  --ccs-winter-fog:       #d9d9d9;
+
+  /* ───── SÉMANTIQUES ─────
+     Tokens d'usage. Les sémantiques pointent vers les variantes accessibles
+     par défaut. Les versions originales restent dispo via --ccs-*-soft pour
+     les surfaces décoratives larges (hero, vichy, illustrations). */
+  --ccs-bg:            var(--ccs-cream);
+  --ccs-surface:       var(--ccs-cream-light);
+  --ccs-text:          var(--ccs-earth-deep);   /* body — AA */
+  --ccs-text-soft:     var(--ccs-earth);        /* méta, caption — usage non-critique */
+  --ccs-text-heading:  var(--ccs-forest);       /* titres ≥18pt — AA-large */
+  --ccs-text-link:     var(--ccs-forest-deep);  /* liens body — AAA */
+  --ccs-border:        var(--ccs-sage-deep);    /* borders visibles — AA-large */
+  --ccs-border-soft:   var(--ccs-sage);         /* borders décoratives non-critiques */
+  --ccs-accent:        var(--ccs-forest);
+  --ccs-accent-soft:   var(--ccs-sage);
+  --ccs-accent-strong: var(--ccs-forest-deep);  /* CTA AAA, focus ring */
+  --ccs-on-accent:     var(--ccs-cream-light);  /* texte sur forest — AA 4.49 */
+
+  /* ───── TYPOGRAPHIE — système 2+1 ───── */
+  --ccs-font-display: "Pompiere", "Italiana", serif;          /* TITRES (h1, h2, display) */
+  --ccs-font-heading: "Pompiere", "Italiana", serif;          /* alias compat (sous-titres) */
+  --ccs-font-body:    "Fraunces", "Iowan Old Style", Garamond, serif;  /* BODY (paragraphes, lede, captions) */
+  --ccs-font-script:  "Meow Script", cursive;                 /* ACCENT RARE (cover, signature) */
+  --ccs-font-ornament: "Meow Script", cursive;                /* alias compat (était Ballet) */
+
+  --ccs-fs-display-xl: 5rem;
+  --ccs-fs-display-lg: 3.5rem;
+  --ccs-fs-display-md: 2.5rem;
+  --ccs-fs-heading-lg: 2rem;
+  --ccs-fs-heading-md: 1.5rem;
+  --ccs-fs-heading-sm: 1.25rem;
+  --ccs-fs-body-lg:    1.125rem;
+  --ccs-fs-body:       1rem;
+  --ccs-fs-body-sm:    0.875rem;
+  --ccs-fs-caption:    0.75rem;
+
+  --ccs-lh-display: 1.05;
+  --ccs-lh-heading: 1.2;
+  --ccs-lh-body:    1.65;
+
+  --ccs-ls-tight:  -0.01em;
+  --ccs-ls-normal:  0;
+  --ccs-ls-wide:    0.04em;
+  --ccs-ls-wider:   0.12em;
+
+  /* ───── SPACE ───── */
+  --ccs-s-0: 0;
+  --ccs-s-1: 0.25rem;
+  --ccs-s-2: 0.5rem;
+  --ccs-s-3: 0.75rem;
+  --ccs-s-4: 1rem;
+  --ccs-s-5: 1.5rem;
+  --ccs-s-6: 2rem;
+  --ccs-s-7: 3rem;
+  --ccs-s-8: 4rem;
+  --ccs-s-9: 6rem;
+  --ccs-s-10: 8rem;
+
+  /* ───── RADIUS ───── */
+  --ccs-r-none: 0;
+  --ccs-r-sm:   4px;
+  --ccs-r-md:   8px;
+  --ccs-r-lg:   16px;
+  --ccs-r-xl:   24px;
+  --ccs-r-soft: 32px;
+  --ccs-r-pill: 999px;
+
+  /* ───── SHADOW ───── */
+  --ccs-shadow-soft: 0 4px 24px rgba(139, 114, 93, 0.08);
+  --ccs-shadow-card: 0 8px 32px rgba(69, 125, 88, 0.10);
+
+  /* ───── MOTION ───── */
+  --ccs-dur-fast:  150ms;
+  --ccs-dur-base:  260ms;
+  --ccs-dur-slow:  420ms;
+  --ccs-dur-bloom: 680ms;
+  --ccs-ease-soft:  cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ccs-ease-bloom: cubic-bezier(0.16, 1.05, 0.4, 1);
+
+  /* ───── PATTERN ───── */
+  --ccs-gingham-size: 16px;
+}
+
+/* ───── THEMES SAISONNIERS ─────
+   Applique [data-season="spring|summer|autumn|winter"] sur <html> ou un wrapper
+   pour basculer toute la DA. */
+[data-season="summer"]  { --ccs-accent: var(--ccs-summer-coral); --ccs-accent-soft: var(--ccs-summer-sky); --ccs-text-heading: var(--ccs-winter-navy); }
+[data-season="autumn"]  { --ccs-accent: var(--ccs-autumn-rust); --ccs-accent-soft: var(--ccs-autumn-peach); --ccs-text-heading: var(--ccs-autumn-chestnut); --ccs-text: var(--ccs-autumn-chestnut); }
+[data-season="winter"]  { --ccs-bg: var(--ccs-winter-snow); --ccs-accent: var(--ccs-winter-navy); --ccs-accent-soft: var(--ccs-winter-ice); --ccs-text-heading: var(--ccs-winter-navy); --ccs-text: #3a3f6e; }
+
+/* ───── RESET DOUX ───── */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--ccs-bg);
+  color: var(--ccs-text);
+  font-family: var(--ccs-font-body);
+  font-size: var(--ccs-fs-body-lg);
+  line-height: var(--ccs-lh-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ───── TYPO UTILITAIRES ───── */
+.ccs-display { font-family: var(--ccs-font-display); font-weight: 400; line-height: var(--ccs-lh-display); color: var(--ccs-text-heading); }
+.ccs-heading { font-family: var(--ccs-font-heading); font-weight: 400; line-height: var(--ccs-lh-heading); letter-spacing: var(--ccs-ls-wide); color: var(--ccs-text-heading); }
+.ccs-body    { font-family: var(--ccs-font-body); }
+
+.ccs-fs-display-xl { font-size: var(--ccs-fs-display-xl); }
+.ccs-fs-display-lg { font-size: var(--ccs-fs-display-lg); }
+.ccs-fs-display-md { font-size: var(--ccs-fs-display-md); }
+.ccs-fs-heading-lg { font-size: var(--ccs-fs-heading-lg); }
+.ccs-fs-heading-md { font-size: var(--ccs-fs-heading-md); }
+
+/* ───── MOTIF VICHY (Gingham) — CSS pur, sans image ─────
+   Usage : <div class="ccs-gingham"> ou bg sur n'importe quel élément.
+   Modifier --ccs-gingham-color pour changer la teinte saisonnière. */
+.ccs-gingham {
+  --ccs-gingham-color: var(--ccs-sage);
+  --_g: var(--ccs-gingham-color);
+  background-color: var(--ccs-cream);
+  background-image:
+    linear-gradient(var(--_g) 50%, transparent 50%),
+    linear-gradient(90deg, var(--_g) 50%, transparent 50%);
+  background-size: var(--ccs-gingham-size) var(--ccs-gingham-size);
+  background-position: 0 0, 0 0;
+  opacity: 1;
+}
+/* La vraie sensation de vichy se fait avec deux couches à 50% d'opacité qui se croisent */
+.ccs-gingham {
+  background-image:
+    repeating-linear-gradient(0deg,
+      transparent 0 calc(var(--ccs-gingham-size) / 2),
+      color-mix(in srgb, var(--ccs-gingham-color) 45%, transparent) calc(var(--ccs-gingham-size) / 2) var(--ccs-gingham-size)),
+    repeating-linear-gradient(90deg,
+      transparent 0 calc(var(--ccs-gingham-size) / 2),
+      color-mix(in srgb, var(--ccs-gingham-color) 45%, transparent) calc(var(--ccs-gingham-size) / 2) var(--ccs-gingham-size));
+  background-color: var(--ccs-cream);
+}
+
+.ccs-gingham--spring { --ccs-gingham-color: var(--ccs-sage); }
+.ccs-gingham--summer { --ccs-gingham-color: var(--ccs-summer-blush); }
+.ccs-gingham--autumn { --ccs-gingham-color: var(--ccs-autumn-peach); }
+.ccs-gingham--winter { --ccs-gingham-color: var(--ccs-winter-ice); }
+
+/* ───── PRÉFÉRENCES UTILISATEUR ───── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* Mode contraste renforcé : on remonte d'un cran tout ce qui n'était qu'AA-large */
+@media (prefers-contrast: more) {
+  :root {
+    --ccs-text-heading: var(--ccs-forest-deep);
+    --ccs-border:       var(--ccs-forest-deep);
+    --ccs-accent:       var(--ccs-forest-deep);
+  }
+}
+
+/* ───── FOCUS VISIBLE ─────
+   Anneau systématique au clavier — invisible à la souris (focus-visible).
+   forest-deep sur cream = 7.94 (AAA) → focus parfaitement détaché. */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--ccs-accent-strong);
+  outline-offset: 3px;
+  border-radius: var(--ccs-r-sm);
+}
+
+/* ───── SR-ONLY (utility) ───── */
+.ccs-sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+/* ───── SKIP LINK (utility) ─────
+   À mettre comme tout premier <a> du <body> : <a href="#main" class="ccs-skip">Aller au contenu</a> */
+.ccs-skip {
+  position: absolute; top: -100px; left: var(--ccs-s-4);
+  background: var(--ccs-accent-strong); color: var(--ccs-cream-light);
+  padding: var(--ccs-s-2) var(--ccs-s-4); border-radius: var(--ccs-r-md);
+  font-family: var(--ccs-font-heading); letter-spacing: var(--ccs-ls-wider);
+  text-decoration: none; z-index: 9999;
+  transition: top var(--ccs-dur-fast) var(--ccs-ease-soft);
+}
+.ccs-skip:focus { top: var(--ccs-s-4); }

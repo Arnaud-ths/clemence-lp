@@ -1,0 +1,239 @@
+/* ════════════════════════════════════════════════════════════════
+   Clémence Creative Studio — Colors & Type
+   Brand foundations distilled from the Canva charte (DAHFg4y11js),
+   tokens.css and the master playbook. Self-hosted Pompiere + Meow
+   Script; EB Garamond via Google Fonts (CMU Serif substitute).
+   ════════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Pompiere&family=Meow+Script&display=swap');
+
+/* Self-hosted display + signature faces (preferred over CDN fallbacks) */
+@font-face {
+  font-family: "Pompiere";
+  src: url("fonts/Pompiere.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Meow Script";
+  src: url("fonts/MeowScript.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+:root {
+  /* ─────────────────────────────────────────────
+     COLOR — Base palette (hex written in the charte)
+     ───────────────────────────────────────────── */
+  --ccs-cream:        #f8f3e3;   /* primary background, all surfaces */
+  --ccs-cream-light:  #fdf6e1;   /* raised surfaces, highlights */
+  --ccs-cream-deep:   #efe6cb;   /* hairline fills, hovers */
+  --ccs-earth:        #8b725d;   /* warm brown — meta / captions */
+  --ccs-forest:       #457d58;   /* signature green — headings, CTA */
+  --ccs-sage:         #9bbf9f;   /* soft green — decorative surfaces */
+  --ccs-ink:          #2a2520;   /* strongest text, rare */
+
+  /* Accessible "deep" variants (WCAG 2.2 — see accessibility.md).
+     Same hue + chroma, lower luminance, so the look is ~90% identical. */
+  --ccs-earth-deep:   #705846;   /* 5.96 on cream · AA  · body text */
+  --ccs-forest-deep:  #2d523c;   /* 7.94 on cream · AAA · links, focus, labels */
+  --ccs-sage-deep:    #527958;   /* 4.47 on cream · AA-L · borders, ribbons */
+
+  /* ─────────────────────────────────────────────
+     COLOR — Seasonal accents (palette swaps per season)
+     ───────────────────────────────────────────── */
+  /* 🌸 Spring — green + cream + powder rose */
+  --ccs-spring-rose:  #f4d2d2;
+  /* ☀️ Summer — sky / blush / coral / sun / tangerine / lavender */
+  --ccs-summer-sky:       #bcd4ec;
+  --ccs-summer-blush:     #f6c4c8;
+  --ccs-summer-coral:     #ef7c6f;
+  --ccs-summer-sun:       #f7d56b;
+  --ccs-summer-tangerine: #ef9a55;
+  --ccs-summer-lavender:  #d9c6e6;
+  /* 🍂 Autumn — chestnut / rust / pumpkin / peach */
+  --ccs-autumn-chestnut:  #5a342a;
+  --ccs-autumn-rust:      #b85e2c;
+  --ccs-autumn-pumpkin:   #e87b2d;
+  --ccs-autumn-peach:     #f3d2a0;
+  /* ❄️ Winter — navy / ice / snow / fog */
+  --ccs-winter-navy:      #0f1463;
+  --ccs-winter-ice:       #c7daf5;
+  --ccs-winter-snow:      #faf3df;
+  --ccs-winter-fog:       #d9d9d9;
+
+  /* ─────────────────────────────────────────────
+     COLOR — Semantic tokens (point at accessible variants)
+     ───────────────────────────────────────────── */
+  --bg:            var(--ccs-cream);
+  --surface:       var(--ccs-cream-light);
+  --surface-2:     var(--ccs-cream-deep);
+  --fg1:           var(--ccs-earth-deep);   /* primary body text — AA */
+  --fg2:           var(--ccs-earth);        /* meta, captions — non-critical */
+  --fg-heading:    var(--ccs-forest);       /* titles ≥18pt — AA-large */
+  --fg-strong:     var(--ccs-forest-deep);  /* high-contrast headings — AAA */
+  --link:          var(--ccs-forest-deep);  /* body links — AAA */
+  --border:        var(--ccs-sage-deep);    /* visible borders — AA-large */
+  --border-soft:   var(--ccs-sage);         /* decorative borders only */
+  --accent:        var(--ccs-forest);
+  --accent-soft:   var(--ccs-sage);
+  --accent-strong: var(--ccs-forest-deep);  /* focus ring, AAA CTA */
+  --on-accent:     var(--ccs-cream-light);  /* text on forest — AA 4.49 */
+
+  /* ─────────────────────────────────────────────
+     TYPE — 2 + 1 family system
+       · Pompiere    → display + all headings (retro elegant)
+       · EB Garamond → body, ledes, captions (CMU Serif substitute)
+       · Meow Script → rare signature accent (covers, the name "Clémence")
+     ───────────────────────────────────────────── */
+  --serif-display: "Pompiere", "Italiana", serif;
+  --serif-body:    "EB Garamond", "Iowan Old Style", Garamond, Georgia, serif;
+  --script:        "Meow Script", "Dancing Script", cursive;
+
+  /* Type scale (rem, base 16px) */
+  --fs-display-xl: 5rem;     /* 80px — page hero */
+  --fs-display-lg: 3.5rem;   /* 56px — section hero */
+  --fs-display-md: 2.5rem;   /* 40px — card title */
+  --fs-heading-lg: 2rem;     /* 32px — section subtitle */
+  --fs-heading-md: 1.5rem;   /* 24px — h3 */
+  --fs-heading-sm: 1.25rem;  /* 20px — h4 */
+  --fs-body-lg:    1.125rem; /* 18px — comfortable body (default) */
+  --fs-body:       1rem;     /* 16px — standard body */
+  --fs-body-sm:    0.875rem; /* 14px — captions */
+  --fs-caption:    0.75rem;  /* 12px — meta */
+
+  --lh-display: 1.05;
+  --lh-heading: 1.2;
+  --lh-body:    1.65;
+
+  --ls-tight:  -0.01em;
+  --ls-normal:  0;
+  --ls-wide:    0.04em;
+  --ls-wider:   0.12em;
+
+  /* ─────────────────────────────────────────────
+     SPACE · RADIUS · SHADOW · MOTION · PATTERN
+     ───────────────────────────────────────────── */
+  --s-1: 0.25rem;  --s-2: 0.5rem;  --s-3: 0.75rem; --s-4: 1rem;
+  --s-5: 1.5rem;   --s-6: 2rem;    --s-7: 3rem;    --s-8: 4rem;
+  --s-9: 6rem;     --s-10: 8rem;
+
+  --r-sm: 4px;  --r-md: 8px;  --r-lg: 16px;  --r-xl: 24px;
+  --r-soft: 32px;  --r-pill: 999px;
+
+  --shadow-soft: 0 4px 24px rgba(139, 114, 93, 0.08);
+  --shadow-card: 0 8px 32px rgba(69, 125, 88, 0.10);
+
+  --dur-fast: 150ms; --dur-base: 260ms; --dur-slow: 420ms; --dur-bloom: 680ms;
+  --ease-soft:  cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-bloom: cubic-bezier(0.16, 1.05, 0.4, 1);
+
+  --gingham-size: 16px;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   SEMANTIC TYPE — ready-made element styles
+   ════════════════════════════════════════════════════════════════ */
+.h1 {
+  font-family: var(--serif-display);
+  font-size: var(--fs-display-lg);
+  line-height: var(--lh-display);
+  color: var(--fg-heading);
+  letter-spacing: var(--ls-tight);
+  margin: 0;
+}
+.h2 {
+  font-family: var(--serif-display);
+  font-size: var(--fs-display-md);
+  line-height: var(--lh-heading);
+  color: var(--fg-heading);
+  margin: 0;
+}
+.h3 {
+  font-family: var(--serif-display);
+  font-size: var(--fs-heading-lg);
+  line-height: var(--lh-heading);
+  color: var(--fg-heading);
+  margin: 0;
+}
+.eyebrow {
+  font-family: var(--serif-body);
+  font-size: var(--fs-caption);
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  color: var(--fg2);
+  margin: 0;
+}
+.p {
+  font-family: var(--serif-body);
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-body);
+  color: var(--fg1);
+  margin: 0;
+}
+.lede {
+  font-family: var(--serif-body);
+  font-style: italic;
+  font-size: var(--fs-heading-md);
+  line-height: 1.4;
+  color: var(--fg1);
+  margin: 0;
+}
+.caption {
+  font-family: var(--serif-body);
+  font-size: var(--fs-body-sm);
+  color: var(--fg2);
+  margin: 0;
+}
+.script {
+  font-family: var(--script);
+  color: var(--fg-heading);
+  font-weight: 400;
+}
+.code {
+  font-family: "SFMono-Regular", "Menlo", "Consolas", monospace;
+  font-size: 0.9em;
+  background: var(--surface-2);
+  color: var(--ccs-autumn-chestnut);
+  padding: 0.15em 0.4em;
+  border-radius: var(--r-sm);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   SIGNATURE MOTIF — vichy / gingham (pure CSS, no image)
+   Two 45%-opacity layers crossing → the classic 3-tone gingham.
+   ════════════════════════════════════════════════════════════════ */
+.gingham {
+  --gingham-color: var(--ccs-sage);
+  background-color: var(--ccs-cream);
+  background-image:
+    repeating-linear-gradient(0deg,
+      transparent 0 calc(var(--gingham-size) / 2),
+      color-mix(in srgb, var(--gingham-color) 45%, transparent) calc(var(--gingham-size) / 2) var(--gingham-size)),
+    repeating-linear-gradient(90deg,
+      transparent 0 calc(var(--gingham-size) / 2),
+      color-mix(in srgb, var(--gingham-color) 45%, transparent) calc(var(--gingham-size) / 2) var(--gingham-size));
+}
+.gingham--spring { --gingham-color: var(--ccs-sage); }
+.gingham--summer { --gingham-color: var(--ccs-summer-blush); }
+.gingham--autumn { --gingham-color: var(--ccs-autumn-peach); }
+.gingham--winter { --gingham-color: var(--ccs-winter-ice); }
+
+/* ════════════════════════════════════════════════════════════════
+   SEASONAL THEME SWITCH — set [data-season] on a wrapper / <html>
+   ════════════════════════════════════════════════════════════════ */
+[data-season="summer"] { --accent: var(--ccs-summer-coral); --accent-soft: var(--ccs-summer-sky); --fg-heading: var(--ccs-winter-navy); }
+[data-season="autumn"] { --accent: var(--ccs-autumn-rust); --accent-soft: var(--ccs-autumn-peach); --fg-heading: var(--ccs-autumn-chestnut); --fg1: var(--ccs-autumn-chestnut); }
+[data-season="winter"] { --bg: var(--ccs-winter-snow); --accent: var(--ccs-winter-navy); --accent-soft: var(--ccs-winter-ice); --fg-heading: var(--ccs-winter-navy); --fg1: #3a3f6e; }
+
+/* ════════════════════════════════════════════════════════════════
+   FOCUS — always visible, forest-deep on cream = 7.94 (AAA)
+   ════════════════════════════════════════════════════════════════ */
+:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 3px;
+  border-radius: var(--r-sm);
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
