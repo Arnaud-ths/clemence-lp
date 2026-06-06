@@ -18,6 +18,15 @@ const HERO_LOGO = {
   winter: `${ASSET}/logos/logo-navy.png`,
 };
 
+const HERO_PORTFOLIO = [
+  `${ASSET}/hero-portfolio/portfolio-00.jpg`,
+  `${ASSET}/hero-portfolio/portfolio-01.jpg`,
+  `${ASSET}/hero-portfolio/portfolio-02.jpg`,
+  `${ASSET}/hero-portfolio/portfolio-03.jpg`,
+  `${ASSET}/hero-portfolio/portfolio-04.jpg`,
+  `${ASSET}/hero-portfolio/portfolio-05.jpg`,
+];
+
 /* headline split into rising words */
 function RisingHeadline({ start = 120, step = 70, size }) {
   const words = ["Une", "présence", "digitale", "qui"];
@@ -149,10 +158,59 @@ function HeroCollage({ season, onContact }) {
   );
 }
 
+/* ── D · PORTFOLIO — bento mosaic of real client work ── */
+function HeroPortfolio({ season, onContact }) {
+  const tileBase = { borderRadius: 14, overflow: "hidden", boxShadow: "var(--shadow-soft)" };
+  const img = { width: "100%", height: "100%", objectFit: "cover", display: "block" };
+  return (
+    <section id="top" className="wrap" style={{ padding: "60px 40px 64px" }}>
+      <div className="grid-hero" style={{ display: "grid", gridTemplateColumns: "1fr 1.18fr", gap: 48, alignItems: "center" }}>
+        <div>
+          <HeroEyebrow />
+          <h1 style={{ fontFamily: "var(--serif-display)", color: "var(--fg-heading)", fontSize: "clamp(44px, 6.4vw, 76px)", lineHeight: 1.0, margin: 0, letterSpacing: "-0.01em" }}>
+            <span className="rise-word" style={{ "--d": "160ms" }}>Mon</span>{" "}
+            <span className="rise-word" style={{ "--d": "230ms" }}>travail</span>{" "}
+            <span className="rise-word" style={{ "--d": "320ms", fontFamily: "var(--script)", fontSize: "1.16em", color: "var(--accent)", lineHeight: 0.9 }}>parle</span>
+            <span className="rise-word" style={{ "--d": "380ms" }}> pour moi.</span>
+          </h1>
+          <p className="enter p" style={{ "--d": "520ms", marginTop: 26, fontSize: 20, maxWidth: "46ch" }}>
+            5 ans à façonner la présence Instagram de marques lifestyle artisanales — mode, bijou, décoration, édition. <em style={{ color: "var(--fg-heading)" }}>Chaque feed est cousu main</em>.
+          </p>
+          <HeroCTAs d={640} onContact={onContact} />
+        </div>
+        <div className="hero-visual" style={{ position: "relative", minHeight: 560 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1.25fr 1fr 1fr", gridTemplateRows: "1fr 1fr", gap: 10, height: "100%", minHeight: 560 }}>
+            <div className="enter-bloom" style={{ ...tileBase, "--d": "240ms", gridRow: "1 / 3", boxShadow: "var(--shadow-card)", transform: "rotate(-1.2deg)" }}>
+              <img src={HERO_PORTFOLIO[0]} alt="Réalisation portfolio Clémence" style={img} />
+            </div>
+            <div className="enter-bloom" style={{ ...tileBase, "--d": "320ms", transform: "rotate(1.4deg)" }}>
+              <img src={HERO_PORTFOLIO[1]} alt="Réalisation portfolio Clémence" style={img} />
+            </div>
+            <div className="enter-bloom" style={{ ...tileBase, "--d": "400ms", transform: "rotate(-1.8deg)" }}>
+              <img src={HERO_PORTFOLIO[2]} alt="Réalisation portfolio Clémence" style={img} />
+            </div>
+            <div className="enter-bloom" style={{ ...tileBase, "--d": "480ms", transform: "rotate(0.8deg)" }}>
+              <img src={HERO_PORTFOLIO[3]} alt="Réalisation portfolio Clémence" style={img} />
+            </div>
+            <div className="enter-bloom" style={{ ...tileBase, "--d": "560ms", transform: "rotate(-0.9deg)" }}>
+              <img src={HERO_PORTFOLIO[4]} alt="Réalisation portfolio Clémence" style={img} />
+            </div>
+          </div>
+          <div className="enter-bloom" style={{ "--d": "680ms", position: "absolute", right: -10, bottom: -22, width: "30%", aspectRatio: "1/1", borderRadius: 16, overflow: "hidden", boxShadow: "var(--shadow-card)", border: "3px solid var(--surface)", transform: "rotate(4deg)", zIndex: 3 }}>
+            <img src={HERO_PORTFOLIO[5]} alt="Réalisation portfolio Clémence" style={img} />
+          </div>
+          <img src={HERO_LOGO[season]} alt="Monogramme CCS" style={{ position: "absolute", top: -16, left: -18, width: 64, opacity: 0.95, zIndex: 4, transform: "rotate(-8deg)", filter: "drop-shadow(0 8px 16px rgba(112,88,70,.22))" }} />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Hero({ variant, season, onContact }) {
   if (variant === "centered") return <HeroCentered season={season} onContact={onContact} />;
   if (variant === "collage") return <HeroCollage season={season} onContact={onContact} />;
+  if (variant === "portfolio") return <HeroPortfolio season={season} onContact={onContact} />;
   return <HeroEditorial season={season} onContact={onContact} />;
 }
 
-Object.assign(window, { Hero, HERO_ART, HERO_LOGO, ASSET });
+Object.assign(window, { Hero, HERO_ART, HERO_LOGO, HERO_PORTFOLIO, ASSET });

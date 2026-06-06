@@ -28,13 +28,13 @@
 <script type="text/babel" src="sections.jsx"></script>
 <script type="text/babel">
   const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-    "heroVariant": "editorial",
+    "heroVariant": "portfolio",
     "marqueeSpeed": 8,
     "vichySize": 16
   }/*EDITMODE-END*/;
 
-  const HERO_LABELS = { editorial: "Éditorial", centered: "Centrée", collage: "Collage" };
-  const HERO_KEYS = { "Éditorial": "editorial", "Centrée": "centered", "Collage": "collage" };
+  const HERO_LABELS = { editorial: "Éditorial", centered: "Centrée", collage: "Collage", portfolio: "Portfolio" };
+  const HERO_KEYS = { "Éditorial": "editorial", "Centrée": "centered", "Collage": "collage", "Portfolio": "portfolio" };
 
   // ── Motion (Web Animations API) — CSS resting state stays fully visible ──
   const EASE_BLOOM = "cubic-bezier(.16,1.05,.4,1)";
@@ -115,9 +115,9 @@
         <Footer season={season} setSeason={setSeason} onNav={onNav} />
 
         <TweaksPanel>
-          <TweakSection label="Hero — 3 directions à comparer" />
+          <TweakSection label="Hero — 4 directions à comparer" />
           <TweakRadio label="Mise en page" value={HERO_LABELS[t.heroVariant]}
-            options={["Éditorial", "Centrée", "Collage"]}
+            options={["Portfolio", "Éditorial", "Centrée", "Collage"]}
             onChange={(v) => setTweak("heroVariant", HERO_KEYS[v])} />
           <TweakSection label="Motion & motif" />
           <TweakSlider label="Vitesse du ruban" value={t.marqueeSpeed} min={1} max={10} step={1}
