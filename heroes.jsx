@@ -18,10 +18,10 @@ const HERO_LOGO = {
   winter: `${ASSET}/logos/logo-navy.png`,
 };
 
-// Hero showcase: 1 portrait Clémence + 1 vraie référence cliente (Caravane Paris 200K)
+// Hero showcase: 2 photos lifestyle (Clémence + ambiance Paris) — pas de case study
 const HERO_PORTFOLIO = [
   `${ASSET}/lifestyle/clemence-robe-verte.jpg`, // Clémence portrait robe verte balcon
-  `${ASSET}/references/portfolio-00.jpg`,       // Caravane Paris case study (en backdrop)
+  `${ASSET}/lifestyle/cerisiers-1.jpg`,         // Cerisiers en fleurs printemps parisien
 ];
 
 /* headline split into rising words */
@@ -175,9 +175,9 @@ function HeroPortfolio({ season, onContact }) {
         <div className="hero-visual" style={{ position: "relative", minHeight: 520 }}>
           {/* Vichy backdrop card */}
           <div className={`gingham gingham--${season} enter-bloom`} style={{ "--d": "320ms", position: "absolute", top: 18, right: 0, width: "78%", aspectRatio: "4/5", borderRadius: 28, transform: "rotate(-3deg)", boxShadow: "var(--shadow-soft)", border: "1px solid var(--border)" }} />
-          {/* Case study card (back-right, horizontal) — Caravane Paris pour social proof */}
-          <div className="enter-bloom" style={{ "--d": "440ms", position: "absolute", top: 12, right: 0, width: "62%", aspectRatio: "4/3", borderRadius: 20, overflow: "hidden", boxShadow: "var(--shadow-soft)", border: "3px solid var(--surface)", transform: "rotate(4deg)", zIndex: 2 }}>
-            <img src={HERO_PORTFOLIO[1]} alt="Référence cliente — Caravane Paris (200K abonnés)" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+          {/* Ambiance lifestyle card (back-right, vertical) — cerisiers Paris pour atmosphère */}
+          <div className="enter-bloom" style={{ "--d": "440ms", position: "absolute", top: 8, right: 0, width: "54%", aspectRatio: "3/4", borderRadius: 20, overflow: "hidden", boxShadow: "var(--shadow-soft)", border: "3px solid var(--surface)", transform: "rotate(5deg)", zIndex: 2 }}>
+            <img src={HERO_PORTFOLIO[1]} alt="Cerisiers en fleurs au printemps parisien" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
           </div>
           {/* Portrait Clémence (front-left, vertical, dominant) — robe verte balcon parisien */}
           <div className="enter-bloom" style={{ "--d": "580ms", position: "absolute", left: 0, bottom: 0, width: "62%", aspectRatio: "3/4", borderRadius: 22, overflow: "hidden", boxShadow: "var(--shadow-card)", border: "4px solid var(--surface)", transform: "rotate(-3deg)", zIndex: 3 }}>

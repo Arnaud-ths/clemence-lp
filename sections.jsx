@@ -38,12 +38,12 @@ function Marquee({ dur = 28 }) {
   );
 }
 
-/* ── SERVICES / LES 4 FORMULES (vrais tarifs) ── */
+/* ── SERVICES / LES 4 FORMULES (vrais tarifs + images) ── */
 const OFFERS = [
-  { n: "01", slug: "premiers-pas",  t: "Les Premiers Pas",  d: "Audit complet, positionnement, 10 recommandations concrètes et call de restitution. Livré en 7 jours.", tag: "Ponctuel", price: "270 € TTC" },
-  { n: "02", slug: "la-creative",   t: "La Créative",       d: "Charte visuelle, piliers de contenu, 1 mois de calendrier édito et 2 calls pour ancrer la méthode.", tag: "Signature", price: "dès 545 € TTC" },
-  { n: "03", slug: "quatre-saisons", t: "Les Quatre Saisons", d: "Tout La Créative + 4 chartes saisonnières + bibliothèque réutilisable + accompagnement 12 mois.", tag: "Engagement", price: "dès 880 € TTC" },
-  { n: "04", slug: "sur-mesure",    t: "La Sur-Mesure & Options", d: "Gestion complète, création photo/vidéo, Pinterest, refonte ou formation 1:1. Pour tout besoin hors cadre.", tag: "Devis", price: "TJ 450 € HT" },
+  { n: "01", slug: "premiers-pas",  t: "Les Premiers Pas",  d: "Audit complet, positionnement, 10 recommandations concrètes et call de restitution. Livré en 7 jours.", tag: "Ponctuel",  price: "270 € TTC",     img: `${ASSET}/lifestyle/work-cottagecore.jpg` },
+  { n: "02", slug: "la-creative",   t: "La Créative",       d: "Charte visuelle, piliers de contenu, 1 mois de calendrier édito et 2 calls pour ancrer la méthode.",   tag: "Signature",  price: "dès 545 € TTC", img: `${ASSET}/lifestyle/clemence-robe-verte.jpg` },
+  { n: "03", slug: "quatre-saisons", t: "Les Quatre Saisons", d: "Tout La Créative + 4 chartes saisonnières + bibliothèque réutilisable + accompagnement 12 mois.",     tag: "Engagement", price: "dès 880 € TTC", img: `${ASSET}/lifestyle/interieur-fleurs.jpg` },
+  { n: "04", slug: "sur-mesure",    t: "La Sur-Mesure & Options", d: "Gestion complète, création photo/vidéo, Pinterest, refonte ou formation 1:1. Pour tout besoin hors cadre.", tag: "Devis", price: "TJ 450 € HT", img: `${ASSET}/lifestyle/portrait-clemence.jpg` },
 ];
 
 function Services() {
@@ -51,20 +51,30 @@ function Services() {
     <section id="offres" className="wrap" style={{ padding: "92px 40px" }}>
       <SectionHead eyebrow="Les prestations" title={<>Quatre formules, <span style={{ fontFamily: "var(--script)", color: "var(--accent)", fontSize: "1.12em", lineHeight: 0.9 }}>cousues main</span>.</>} note="Chaque formule s'adapte à ton rythme et à ton budget." />
       <div className="grid-4" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 22 }}>
-        {OFFERS.map((o, i) => (
-          <article key={o.n} className="reveal ccs-card" style={{ "--d": `${i * 100}ms`, background: "var(--surface)", borderRadius: 24, padding: "28px 24px", boxShadow: "var(--shadow-soft)", border: "1px solid color-mix(in srgb, var(--border) 45%, transparent)", display: "flex", flexDirection: "column", gap: 12 }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <span style={{ fontFamily: "var(--serif-display)", fontSize: 34, color: "var(--accent-soft)" }}>{o.n}</span>
-              <span className="ccs-chip">{o.tag}</span>
-            </div>
-            <h3 style={{ fontFamily: "var(--serif-display)", color: "var(--fg-heading)", fontSize: 24, margin: "4px 0 0", lineHeight: 1.05 }}>{o.t}</h3>
-            <p className="p" style={{ fontSize: 15 }}>{o.d}</p>
-            <div style={{ marginTop: "auto", paddingTop: 14, borderTop: "1px dashed color-mix(in srgb, var(--border) 60%, transparent)", display: "flex", flexDirection: "column", gap: 8 }}>
-              <span style={{ fontFamily: "var(--serif-display)", color: "var(--fg-heading)", fontSize: 22, lineHeight: 1.0, letterSpacing: "-0.01em" }}>{o.price}</span>
-              <a href={`prestations.html#${o.slug}`} style={{ display: "inline-flex", alignItems: "center", gap: 7, fontFamily: "var(--serif-body)", color: "var(--link)", textDecoration: "underline", textUnderlineOffset: 3, fontSize: 15 }} className="ccs-navlink">En savoir plus <span className="ccs-btn-arrow" style={{ display: "inline-flex" }}><Icon name="arrow-right" size={14} /></span></a>
-            </div>
-          </article>
-        ))}
+        {OFFERS.map((o, i) => {
+          const isSignature = o.slug === "la-creative";
+          return (
+            <article key={o.n} className="reveal ccs-card" style={{ "--d": `${i * 100}ms`, background: "var(--surface)", borderRadius: 24, overflow: "hidden", boxShadow: isSignature ? "0 16px 36px rgba(112,88,70,.18)" : "var(--shadow-soft)", border: isSignature ? "2px solid color-mix(in srgb, var(--accent) 50%, transparent)" : "1px solid color-mix(in srgb, var(--border) 45%, transparent)", display: "flex", flexDirection: "column", transition: "transform .4s cubic-bezier(.16,1,.4,1), box-shadow .4s ease", position: "relative" }}>
+              {isSignature && <span style={{ position: "absolute", top: 12, right: 12, zIndex: 3, background: "var(--accent)", color: "var(--on-accent)", fontFamily: "var(--serif-body)", fontSize: 11, letterSpacing: "0.12em", padding: "5px 11px", borderRadius: 999, textTransform: "uppercase", boxShadow: "0 4px 12px rgba(0,0,0,.16)" }}>✿ Signature</span>}
+              {/* Image au top */}
+              <div style={{ aspectRatio: "4/3", overflow: "hidden", borderBottom: "1px solid color-mix(in srgb, var(--border) 35%, transparent)" }}>
+                <img src={o.img} alt={`Illustration ${o.t}`} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform .8s cubic-bezier(.2,.7,.2,1)" }} />
+              </div>
+              <div style={{ padding: "22px 22px 24px", display: "flex", flexDirection: "column", gap: 11, flex: 1 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <span style={{ fontFamily: "var(--serif-display)", fontSize: 30, color: "var(--accent-soft)", lineHeight: 1 }}>{o.n}</span>
+                  <span className="ccs-chip">{o.tag}</span>
+                </div>
+                <h3 style={{ fontFamily: "var(--serif-display)", color: "var(--fg-heading)", fontSize: 22, margin: "2px 0 0", lineHeight: 1.05 }}>{o.t}</h3>
+                <p className="p" style={{ fontSize: 14, lineHeight: 1.5, margin: 0 }}>{o.d}</p>
+                <div style={{ marginTop: "auto", paddingTop: 12, borderTop: "1px dashed color-mix(in srgb, var(--border) 60%, transparent)", display: "flex", flexDirection: "column", gap: 6 }}>
+                  <span style={{ fontFamily: "var(--serif-display)", color: "var(--fg-heading)", fontSize: 21, lineHeight: 1.0, letterSpacing: "-0.01em" }}>{o.price}</span>
+                  <a href={`prestations.html#${o.slug}`} style={{ display: "inline-flex", alignItems: "center", gap: 6, fontFamily: "var(--serif-body)", color: "var(--link)", textDecoration: "underline", textUnderlineOffset: 3, fontSize: 14 }} className="ccs-navlink">En savoir plus <span className="ccs-btn-arrow" style={{ display: "inline-flex" }}><Icon name="arrow-right" size={13} /></span></a>
+                </div>
+              </div>
+            </article>
+          );
+        })}
       </div>
       <div className="reveal" style={{ "--d": "500ms", display: "flex", flexDirection: "column", alignItems: "center", gap: 16, marginTop: 48 }}>
         <Button variant="primary" icon="arrow-right" onClick={() => window.location.href = "prestations.html"}>Voir toutes les prestations en détail</Button>

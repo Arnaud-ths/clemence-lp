@@ -46,6 +46,8 @@ img { display: block; }
 
 .ccs-card { transition: box-shadow var(--dur-base) var(--ease-soft), transform var(--dur-base) var(--ease-soft), border-color var(--dur-base) var(--ease-soft); }
 .ccs-card:hover { box-shadow: var(--shadow-card); transform: translateY(-4px); border-color: color-mix(in srgb, var(--border) 75%, transparent); }
+.ccs-card img { transition: transform .8s cubic-bezier(.2,.7,.2,1); }
+.ccs-card:hover img { transform: scale(1.06); }
 
 .ccs-field { width: 100%; box-sizing: border-box; font-family: var(--serif-body); font-size: 16px; color: var(--fg1); background: var(--bg); border: 1px solid var(--border); border-radius: var(--field-radius, 12px); padding: 13px 16px; resize: vertical; transition: border-color var(--dur-base) var(--ease-soft), box-shadow var(--dur-base) var(--ease-soft), background var(--dur-base) var(--ease-soft); }
 .ccs-field::placeholder { color: color-mix(in srgb, var(--fg2) 60%, transparent); }
