@@ -43,7 +43,7 @@ const OFFERS = [
   { n: "01", slug: "premiers-pas",  t: "Les Premiers Pas",  d: "Audit complet, positionnement, 10 recommandations concrètes et call de restitution. Livré en 7 jours.", tag: "Ponctuel", price: "270 € TTC" },
   { n: "02", slug: "la-creative",   t: "La Créative",       d: "Charte visuelle, piliers de contenu, 1 mois de calendrier édito et 2 calls pour ancrer la méthode.", tag: "Signature", price: "dès 545 € TTC" },
   { n: "03", slug: "quatre-saisons", t: "Les Quatre Saisons", d: "Tout La Créative + 4 chartes saisonnières + bibliothèque réutilisable + accompagnement 12 mois.", tag: "Engagement", price: "dès 880 € TTC" },
-  { n: "04", slug: "sur-mesure",    t: "Sur-Mesure",        d: "Gestion complète, création photo/vidéo, Pinterest, refonte ou formation 1:1. Pour tout besoin hors cadre.", tag: "Devis", price: "TJ 450 € HT" },
+  { n: "04", slug: "sur-mesure",    t: "La Sur-Mesure & Options", d: "Gestion complète, création photo/vidéo, Pinterest, refonte ou formation 1:1. Pour tout besoin hors cadre.", tag: "Devis", price: "TJ 450 € HT" },
 ];
 
 function Services() {
