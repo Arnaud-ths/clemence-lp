@@ -38,29 +38,74 @@ function Marquee({ dur = 28 }) {
   );
 }
 
-/* ── SERVICES / LES OFFRES ── */
+/* ── SERVICES / LES 4 PRESTATIONS ── */
 const OFFERS = [
-  { n: "01", t: "Gestion complète", d: "Stratégie, ligne édito, création, programmation et community management. Je deviens ta SMM attitrée.", tag: "Mensuel" },
-  { n: "02", t: "Direction artistique", d: "Charte Insta, palettes saisonnières, templates de posts et de stories. La cohérence visuelle, clé en main.", tag: "Projet" },
-  { n: "03", t: "Audit & coaching", d: "Audit de ton compte, plan d'action et session de coaching pour reprendre la main en autonomie.", tag: "Ponctuel" },
+  { n: "01", slug: "gestion-mensuelle", t: "Gestion mensuelle", d: "Stratégie, ligne édito, création, programmation et community management. Je deviens ta SMM attitrée.", tag: "Mensuel", price: "dès 400€/mois" },
+  { n: "02", slug: "les-4-saisons",     t: "Les 4 Saisons",     d: "Pack trimestriel : charte saisonnière, calendrier édito, templates et 12 posts prêts à publier.", tag: "Trimestriel", price: "Pack signature" },
+  { n: "03", slug: "la-creative",       t: "La Créative",       d: "Direction artistique complète : charte Insta, palettes saisonnières, templates de posts et de stories.", tag: "Projet", price: "Sur devis" },
+  { n: "04", slug: "audit-coaching",    t: "L'Audit",           d: "Audit de ton compte, plan d'action et session de coaching pour reprendre la main en autonomie.", tag: "Ponctuel", price: "à partir de 150€" },
 ];
 
 function Services() {
   return (
     <section id="offres" className="wrap" style={{ padding: "92px 40px" }}>
-      <SectionHead eyebrow="Les offres" title="Trois façons de travailler ensemble." note="Chaque formule s'adapte à ton rythme et à ton budget." />
-      <div className="grid-3" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
+      <SectionHead eyebrow="Les prestations" title={<>Quatre formules, <span style={{ fontFamily: "var(--script)", color: "var(--accent)", fontSize: "1.12em", lineHeight: 0.9 }}>cousues main</span>.</>} note="Chaque formule s'adapte à ton rythme et à ton budget." />
+      <div className="grid-4" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 22 }}>
         {OFFERS.map((o, i) => (
-          <article key={o.n} className="reveal ccs-card" style={{ "--d": `${i * 110}ms`, background: "var(--surface)", borderRadius: 24, padding: "30px 28px", boxShadow: "var(--shadow-soft)", border: "1px solid color-mix(in srgb, var(--border) 45%, transparent)", display: "flex", flexDirection: "column", gap: 14 }}>
+          <article key={o.n} className="reveal ccs-card" style={{ "--d": `${i * 100}ms`, background: "var(--surface)", borderRadius: 24, padding: "28px 24px", boxShadow: "var(--shadow-soft)", border: "1px solid color-mix(in srgb, var(--border) 45%, transparent)", display: "flex", flexDirection: "column", gap: 12 }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <span style={{ fontFamily: "var(--serif-display)", fontSize: 36, color: "var(--accent-soft)" }}>{o.n}</span>
+              <span style={{ fontFamily: "var(--serif-display)", fontSize: 34, color: "var(--accent-soft)" }}>{o.n}</span>
               <span className="ccs-chip">{o.tag}</span>
             </div>
-            <h3 style={{ fontFamily: "var(--serif-display)", color: "var(--fg-heading)", fontSize: 28, margin: "4px 0 0", lineHeight: 1.05 }}>{o.t}</h3>
-            <p className="p" style={{ fontSize: 16 }}>{o.d}</p>
-            <a href="#contact" onClick={(e) => { e.preventDefault(); window.ccsScrollTo("contact"); }} style={{ marginTop: "auto", display: "inline-flex", alignItems: "center", gap: 7, fontFamily: "var(--serif-body)", color: "var(--link)", textDecoration: "underline", textUnderlineOffset: 3, fontSize: 16 }} className="ccs-navlink">Découvrir <span className="ccs-btn-arrow" style={{ display: "inline-flex" }}><Icon name="arrow-right" size={15} /></span></a>
+            <h3 style={{ fontFamily: "var(--serif-display)", color: "var(--fg-heading)", fontSize: 24, margin: "4px 0 0", lineHeight: 1.05 }}>{o.t}</h3>
+            <p className="p" style={{ fontSize: 15 }}>{o.d}</p>
+            <div style={{ marginTop: "auto", paddingTop: 12, borderTop: "1px dashed color-mix(in srgb, var(--border) 60%, transparent)", display: "flex", flexDirection: "column", gap: 10 }}>
+              <span className="caption" style={{ fontSize: 13, fontFamily: "var(--script)", color: "var(--accent)", fontSize: 22, lineHeight: 0.9 }}>{o.price}</span>
+              <a href={`prestations.html#${o.slug}`} style={{ display: "inline-flex", alignItems: "center", gap: 7, fontFamily: "var(--serif-body)", color: "var(--link)", textDecoration: "underline", textUnderlineOffset: 3, fontSize: 15 }} className="ccs-navlink">En savoir plus <span className="ccs-btn-arrow" style={{ display: "inline-flex" }}><Icon name="arrow-right" size={14} /></span></a>
+            </div>
           </article>
         ))}
+      </div>
+      <div className="reveal" style={{ "--d": "500ms", display: "flex", justifyContent: "center", marginTop: 44 }}>
+        <Button variant="primary" icon="arrow-right" onClick={() => window.location.href = "prestations.html"}>Voir toutes les prestations en détail</Button>
+      </div>
+    </section>
+  );
+}
+
+/* ── RÉFÉRENCES CLIENTES ── */
+const REFERENCES = [
+  { name: "Caravane Paris", followers: "200K", sector: "Décoration d'intérieur", img: `${ASSET}/references/portfolio-00.jpg`, alt: "Étude de cas — Caravane Paris" },
+  { name: "Mayrena",        followers: "20K",  sector: "Bijouterie",            img: `${ASSET}/references/portfolio-01.jpg`, alt: "Étude de cas — Mayrena" },
+  { name: "Arlun Paris",    followers: "1,1K", sector: "Mode éco-responsable",  img: `${ASSET}/references/portfolio-02.jpg`, alt: "Étude de cas — Arlun Paris" },
+];
+
+function References() {
+  return (
+    <section id="references" className="wrap" style={{ padding: "92px 40px 80px" }}>
+      <SectionHead
+        eyebrow="Mes références"
+        title={<>Des marques qui me <span style={{ fontFamily: "var(--script)", color: "var(--accent)", fontSize: "1.12em", lineHeight: 0.9 }}>font confiance</span>.</>}
+        note={<>3 univers, 3 tons, une même exigence.<br />Voir les case studies complètes.</>}
+      />
+      <div className="grid-3" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 22 }}>
+        {REFERENCES.map((r, i) => (
+          <article key={r.name} className="reveal" style={{ "--d": `${i * 120}ms`, display: "flex", flexDirection: "column", gap: 14 }}>
+            <div style={{ aspectRatio: "4/3", borderRadius: 20, overflow: "hidden", boxShadow: "var(--shadow-card)", border: "1px solid color-mix(in srgb, var(--border) 50%, transparent)" }}>
+              <img src={r.img} alt={r.alt} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: 10, paddingTop: 4 }}>
+              <div>
+                <h3 style={{ fontFamily: "var(--serif-display)", color: "var(--fg-heading)", fontSize: 26, margin: 0, lineHeight: 1.05 }}>{r.name}</h3>
+                <p className="p" style={{ marginTop: 4, fontSize: 14 }}>{r.sector}</p>
+              </div>
+              <span className="ccs-chip" style={{ whiteSpace: "nowrap" }}>{r.followers} abonnés</span>
+            </div>
+          </article>
+        ))}
+      </div>
+      <div className="reveal" style={{ "--d": "420ms", display: "flex", justifyContent: "center", marginTop: 40 }}>
+        <a href={`https://instagram.com/${"clemence.creativestudio"}`} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 8, fontFamily: "var(--serif-body)", color: "var(--link)", textDecoration: "underline", textUnderlineOffset: 4, fontSize: 16 }} className="ccs-navlink">Voir tous mes projets sur Instagram <span style={{ display: "inline-flex" }}><Icon name="arrow-right" size={15} /></span></a>
       </div>
     </section>
   );
@@ -204,50 +249,44 @@ function Contact({ season }) {
   );
 }
 
-/* ── INSTAGRAM TEASER ── */
+/* ── INSTAGRAM TEASER (CTA block, illustrations brand) ── */
 const IG_HANDLE = "clemence.creativestudio";
 const IG_URL = `https://instagram.com/${IG_HANDLE}`;
-const IG_GRID = [
-  `${ASSET}/instagram-grid/portfolio-01.jpg`,
-  `${ASSET}/instagram-grid/proj-14.jpg`,
-  `${ASSET}/instagram-grid/portfolio-02.jpg`,
-  `${ASSET}/instagram-grid/proj-20.jpg`,
-  `${ASSET}/instagram-grid/proj-24.jpg`,
-  `${ASSET}/instagram-grid/proj-15.jpg`,
-  `${ASSET}/instagram-grid/portfolio-03.jpg`,
-  `${ASSET}/instagram-grid/proj-21.jpg`,
-];
 
-function InstagramTeaser() {
+function InstagramTeaser({ season }) {
+  const seasonArt = {
+    spring: `${ASSET}/illustrations/spring/tulipes.png`,
+    summer: `${ASSET}/illustrations/summer/marguerite-creme.png`,
+    autumn: `${ASSET}/illustrations/autumn/feuilles-erable-orange.png`,
+    winter: `${ASSET}/illustrations/winter/fleur-lila.png`,
+  };
   return (
-    <section id="instagram" className="wrap" style={{ padding: "96px 40px 88px", borderTop: "1px solid color-mix(in srgb, var(--border) 30%, transparent)" }}>
-      <SectionHead
-        eyebrow="Le feed, IRL"
-        title={<>Un avant-goût <span style={{ fontFamily: "var(--script)", color: "var(--accent)", fontSize: "1.15em", lineHeight: 0.9 }}>du studio</span>.</>}
-        note={<>Posts, stories, coulisses.<br />Le quotidien d'une SMM à Paris.</>}
-      />
-      <div className="reveal" style={{ "--d": "60ms", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 10, marginBottom: 40 }}>
-        {IG_GRID.map((src, i) => (
-          <a key={i} href={IG_URL} target="_blank" rel="noopener noreferrer"
-             style={{ position: "relative", aspectRatio: "1/1", borderRadius: 14, overflow: "hidden", boxShadow: "var(--shadow-soft)", display: "block", textDecoration: "none" }}
-             className="ig-tile">
-            <img src={src} alt={`Post Instagram Clémence ${i + 1}`} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform .6s var(--ease-soft, ease)" }} />
-            <span className="ig-tile-hover" style={{ position: "absolute", inset: 0, background: "color-mix(in srgb, var(--accent) 55%, transparent)", display: "flex", alignItems: "center", justifyContent: "center", opacity: 0, transition: "opacity .25s ease" }}>
-              <Icon name="instagram" size={26} stroke={1.6} style={{ color: "var(--surface)" }} />
-            </span>
-          </a>
-        ))}
+    <section id="instagram" style={{ padding: "0" }}>
+      <div className={`gingham gingham--${season || "spring"}`} style={{ borderTop: "1px solid color-mix(in srgb, var(--border) 30%, transparent)", borderBottom: "1px solid color-mix(in srgb, var(--border) 30%, transparent)" }}>
+        <div style={{ background: "color-mix(in srgb, var(--surface) 82%, transparent)" }}>
+          <section className="wrap" style={{ padding: "78px 40px", display: "grid", gridTemplateColumns: "1fr 1.4fr 1fr", gap: 32, alignItems: "center" }}>
+            <div className="reveal float" style={{ "--float-dur": "8s", display: "grid", placeItems: "center" }}>
+              <img src={seasonArt[season || "spring"]} alt="Illustration brand" style={{ maxWidth: 130, maxHeight: 160, filter: "drop-shadow(0 12px 22px rgba(112,88,70,.18))" }} />
+            </div>
+            <div className="reveal" style={{ textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: 18 }}>
+              <div className="eyebrow">Suis le quotidien</div>
+              <h2 style={{ fontFamily: "var(--serif-display)", color: "var(--fg-heading)", fontSize: "clamp(34px, 4.6vw, 56px)", margin: 0, lineHeight: 1.0 }}>
+                Le feed, <span style={{ fontFamily: "var(--script)", color: "var(--accent)", fontSize: "1.18em", lineHeight: 0.9 }}>côté coulisses</span>.
+              </h2>
+              <p className="p" style={{ fontSize: 17, maxWidth: "42ch" }}>
+                Posts, stories, projets en cours, inspirations saisonnières — le studio à ciel ouvert sur Instagram.
+              </p>
+              <div style={{ fontFamily: "var(--script)", color: "var(--fg-heading)", fontSize: 36, lineHeight: 1, marginTop: 4 }}>@{IG_HANDLE}</div>
+              <Button variant="primary" icon="instagram" onClick={() => window.open(IG_URL, "_blank", "noopener")}>Me suivre sur Instagram</Button>
+            </div>
+            <div className="reveal float" style={{ "--float-dur": "9s", "--rot": "-6deg", display: "grid", placeItems: "center" }}>
+              <img src={HERO_LOGO[season || "spring"]} alt="Monogramme CCS" style={{ maxWidth: 120, opacity: 0.95, filter: "drop-shadow(0 10px 20px rgba(112,88,70,.18))" }} />
+            </div>
+          </section>
+        </div>
       </div>
-      <div className="reveal" style={{ "--d": "140ms", display: "flex", flexDirection: "column", alignItems: "center", gap: 14, textAlign: "center" }}>
-        <div style={{ fontFamily: "var(--script)", color: "var(--fg-heading)", fontSize: 38, lineHeight: 1 }}>@{IG_HANDLE}</div>
-        <Button variant="primary" icon="instagram" onClick={() => window.open(IG_URL, "_blank", "noopener")}>Me suivre sur Instagram</Button>
-      </div>
-      <style>{`
-        .ig-tile:hover .ig-tile-hover { opacity: 1; }
-        .ig-tile:hover img { transform: scale(1.06); }
-      `}</style>
     </section>
   );
 }
 
-Object.assign(window, { Marquee, Services, Methode, About, Testimonial, Contact, InstagramTeaser, ABOUT_ART, IG_HANDLE, IG_URL });
+Object.assign(window, { Marquee, Services, References, Methode, About, Testimonial, Contact, InstagramTeaser, ABOUT_ART, IG_HANDLE, IG_URL, OFFERS, REFERENCES });

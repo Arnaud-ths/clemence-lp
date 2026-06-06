@@ -82,14 +82,23 @@ function Button({ children, variant = "primary", onClick, icon, type = "button" 
 }
 
 function Nav({ season, setSeason, onContact, onNav }) {
-  const links = [["Le studio", "top"], ["Les offres", "offres"], ["La méthode", "methode"], ["À propos", "apropos"]];
+  // [label, target, isExternalPage]
+  const links = [
+    ["Le studio", "top", false],
+    ["Références", "references", false],
+    ["Prestations", "prestations.html", true],
+    ["La méthode", "methode", false],
+    ["À propos", "apropos", false],
+  ];
   return (
     <header style={{ position: "sticky", top: 0, zIndex: 50, background: "color-mix(in srgb, var(--bg) 86%, transparent)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", borderBottom: "1px solid color-mix(in srgb, var(--border) 28%, transparent)" }}>
       <nav className="wrap" style={{ padding: "15px 40px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 24 }}>
         <Wordmark size={0.82} onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }} />
-        <div className="ccs-navlinks" style={{ display: "flex", alignItems: "center", gap: 30 }}>
-          {links.map(([l, id]) => (
-            <a key={l} href={`#${id}`} onClick={(e) => { e.preventDefault(); onNav(id); }} style={{ fontFamily: "var(--serif-body)", fontSize: 16, color: "var(--fg1)", textDecoration: "none" }} className="ccs-navlink">{l}</a>
+        <div className="ccs-navlinks" style={{ display: "flex", alignItems: "center", gap: 28 }}>
+          {links.map(([l, target, isPage]) => isPage ? (
+            <a key={l} href={target} style={{ fontFamily: "var(--serif-body)", fontSize: 16, color: "var(--fg1)", textDecoration: "none" }} className="ccs-navlink">{l}</a>
+          ) : (
+            <a key={l} href={`#${target}`} onClick={(e) => { e.preventDefault(); onNav(target); }} style={{ fontFamily: "var(--serif-body)", fontSize: 16, color: "var(--fg1)", textDecoration: "none" }} className="ccs-navlink">{l}</a>
           ))}
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
@@ -112,15 +121,24 @@ function Footer({ season, setSeason, onNav }) {
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             <div className="eyebrow">Navigation</div>
-            {[["Le studio", "top"], ["Les offres", "offres"], ["La méthode", "methode"], ["À propos", "apropos"], ["On se parle", "contact"]].map(([l, id]) => (
-              <a key={l} href={`#${id}`} onClick={(e) => { e.preventDefault(); onNav(id); }} style={{ fontFamily: "var(--serif-body)", color: "var(--fg1)", textDecoration: "none", fontSize: 16 }} className="ccs-navlink">{l}</a>
+            {[
+              ["Le studio", "top", false],
+              ["Mes références", "references", false],
+              ["Les prestations", "prestations.html", true],
+              ["La méthode", "methode", false],
+              ["À propos", "apropos", false],
+              ["On se parle", "contact", false],
+            ].map(([l, target, isPage]) => isPage ? (
+              <a key={l} href={target} style={{ fontFamily: "var(--serif-body)", color: "var(--fg1)", textDecoration: "none", fontSize: 16 }} className="ccs-navlink">{l}</a>
+            ) : (
+              <a key={l} href={`#${target}`} onClick={(e) => { e.preventDefault(); onNav(target); }} style={{ fontFamily: "var(--serif-body)", color: "var(--fg1)", textDecoration: "none", fontSize: 16 }} className="ccs-navlink">{l}</a>
             ))}
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             <div className="eyebrow">Me suivre</div>
-            <a href="#" onClick={(e) => e.preventDefault()} style={{ display: "flex", alignItems: "center", gap: 9, fontFamily: "var(--serif-body)", color: "var(--fg1)", textDecoration: "none", fontSize: 16 }} className="ccs-navlink"><Icon name="instagram" size={18} /> @clemence.creative</a>
-            <a href="#" onClick={(e) => e.preventDefault()} style={{ display: "flex", alignItems: "center", gap: 9, fontFamily: "var(--serif-body)", color: "var(--fg1)", textDecoration: "none", fontSize: 16 }} className="ccs-navlink"><Icon name="image" size={18} /> Pinterest</a>
-            <a href="#" onClick={(e) => e.preventDefault()} style={{ display: "flex", alignItems: "center", gap: 9, fontFamily: "var(--serif-body)", color: "var(--fg1)", textDecoration: "none", fontSize: 16 }} className="ccs-navlink"><Icon name="mail" size={18} /> clemence.creativestudio@outlook.com</a>
+            <a href="https://instagram.com/clemence.creativestudio" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: 9, fontFamily: "var(--serif-body)", color: "var(--fg1)", textDecoration: "none", fontSize: 16 }} className="ccs-navlink"><Icon name="instagram" size={18} /> @clemence.creativestudio</a>
+            <a href="https://pinterest.com/clemence.creativestudio" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: 9, fontFamily: "var(--serif-body)", color: "var(--fg1)", textDecoration: "none", fontSize: 16 }} className="ccs-navlink"><Icon name="image" size={18} /> Pinterest</a>
+            <a href="mailto:clemence.creativestudio@outlook.com" style={{ display: "flex", alignItems: "center", gap: 9, fontFamily: "var(--serif-body)", color: "var(--fg1)", textDecoration: "none", fontSize: 16 }} className="ccs-navlink"><Icon name="mail" size={18} /> clemence.creativestudio@outlook.com</a>
           </div>
         </div>
         <div className="wrap stack-sm" style={{ padding: "20px 40px 40px", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 18, borderTop: "1px solid color-mix(in srgb, var(--border) 35%, transparent)" }}>

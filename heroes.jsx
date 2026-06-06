@@ -18,13 +18,10 @@ const HERO_LOGO = {
   winter: `${ASSET}/logos/logo-navy.png`,
 };
 
+// Hero showcase: 2 vraies références clientes (Caravane Paris 200K + Mayrena 20K)
 const HERO_PORTFOLIO = [
-  `${ASSET}/hero-portfolio/portfolio-00.jpg`,
-  `${ASSET}/hero-portfolio/portfolio-01.jpg`,
-  `${ASSET}/hero-portfolio/portfolio-02.jpg`,
-  `${ASSET}/hero-portfolio/portfolio-03.jpg`,
-  `${ASSET}/hero-portfolio/portfolio-04.jpg`,
-  `${ASSET}/hero-portfolio/portfolio-05.jpg`,
+  `${ASSET}/references/portfolio-00.jpg`, // Caravane Paris
+  `${ASSET}/references/portfolio-01.jpg`, // Mayrena
 ];
 
 /* headline split into rising words */
@@ -178,13 +175,13 @@ function HeroPortfolio({ season, onContact }) {
         <div className="hero-visual" style={{ position: "relative", minHeight: 520 }}>
           {/* Vichy backdrop card */}
           <div className={`gingham gingham--${season} enter-bloom`} style={{ "--d": "320ms", position: "absolute", top: 18, right: 0, width: "78%", aspectRatio: "4/5", borderRadius: 28, transform: "rotate(-3deg)", boxShadow: "var(--shadow-soft)", border: "1px solid var(--border)" }} />
-          {/* Big portfolio card (back-right) */}
-          <div className="enter-bloom" style={{ "--d": "440ms", position: "absolute", top: 0, right: 24, width: "70%", aspectRatio: "3/4", borderRadius: 22, overflow: "hidden", boxShadow: "var(--shadow-card)", border: "4px solid var(--surface)", transform: "rotate(2deg)", zIndex: 2 }}>
-            <img src={HERO_PORTFOLIO[0]} alt="Réalisation Clémence Creative Studio" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+          {/* Big portfolio card (back-right) — Caravane Paris */}
+          <div className="enter-bloom" style={{ "--d": "440ms", position: "absolute", top: 0, right: 24, width: "70%", aspectRatio: "4/3", borderRadius: 22, overflow: "hidden", boxShadow: "var(--shadow-card)", border: "4px solid var(--surface)", transform: "rotate(2deg)", zIndex: 2 }}>
+            <img src={HERO_PORTFOLIO[0]} alt="Référence cliente — Caravane Paris" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
           </div>
-          {/* Second portfolio card (front-left, slightly smaller, overlapping) */}
-          <div className="enter-bloom" style={{ "--d": "580ms", position: "absolute", left: 0, bottom: 0, width: "56%", aspectRatio: "4/5", borderRadius: 20, overflow: "hidden", boxShadow: "var(--shadow-card)", border: "4px solid var(--surface)", transform: "rotate(-4deg)", zIndex: 3 }}>
-            <img src={HERO_PORTFOLIO[3]} alt="Réalisation Clémence Creative Studio" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+          {/* Second portfolio card (front-left, slightly smaller, overlapping) — Mayrena */}
+          <div className="enter-bloom" style={{ "--d": "580ms", position: "absolute", left: 0, bottom: 0, width: "60%", aspectRatio: "4/3", borderRadius: 20, overflow: "hidden", boxShadow: "var(--shadow-card)", border: "4px solid var(--surface)", transform: "rotate(-4deg)", zIndex: 3 }}>
+            <img src={HERO_PORTFOLIO[1]} alt="Référence cliente — Mayrena" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
           </div>
           {/* Monogram badge floating over */}
           <img src={HERO_LOGO[season]} alt="Monogramme CCS" style={{ position: "absolute", top: -12, left: "44%", width: 72, opacity: 0.95, zIndex: 4, transform: "rotate(-6deg)", filter: "drop-shadow(0 10px 18px rgba(112,88,70,.24))" }} />
